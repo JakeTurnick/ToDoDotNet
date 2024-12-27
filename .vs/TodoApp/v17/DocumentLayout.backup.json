@@ -1,0 +1,243 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\Projects\\DotNetWeb\\TodoApp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|e:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\node_modules\\react-dom\\cjs\\react-dom.development.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}|",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:todoapp.client\\node_modules\\react-dom\\cjs\\react-dom.development.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E58671DA-68EA-48CC-911F-5501516239F6}|todoapp.client\\todoapp.client.esproj|e:\\projects\\dotnetweb\\todoapp\\todoapp.client\\src\\pages\\todos\\viewtodos.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{E58671DA-68EA-48CC-911F-5501516239F6}|todoapp.client\\todoapp.client.esproj|solutionrelative:todoapp.client\\src\\pages\\todos\\viewtodos.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E58671DA-68EA-48CC-911F-5501516239F6}|todoapp.client\\todoapp.client.esproj|e:\\projects\\dotnetweb\\todoapp\\todoapp.client\\src\\pages\\todos\\todocard.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{E58671DA-68EA-48CC-911F-5501516239F6}|todoapp.client\\todoapp.client.esproj|solutionrelative:todoapp.client\\src\\pages\\todos\\todocard.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E58671DA-68EA-48CC-911F-5501516239F6}|todoapp.client\\todoapp.client.esproj|e:\\projects\\dotnetweb\\todoapp\\todoapp.client\\src\\main.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{E58671DA-68EA-48CC-911F-5501516239F6}|todoapp.client\\todoapp.client.esproj|solutionrelative:todoapp.client\\src\\main.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E58671DA-68EA-48CC-911F-5501516239F6}|todoapp.client\\todoapp.client.esproj|e:\\projects\\dotnetweb\\todoapp\\todoapp.client\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{E58671DA-68EA-48CC-911F-5501516239F6}|todoapp.client\\todoapp.client.esproj|solutionrelative:todoapp.client\\src\\app.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E58671DA-68EA-48CC-911F-5501516239F6}|todoapp.client\\todoapp.client.esproj|e:\\projects\\dotnetweb\\todoapp\\todoapp.client\\src\\pages\\todomanager.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{E58671DA-68EA-48CC-911F-5501516239F6}|todoapp.client\\todoapp.client.esproj|solutionrelative:todoapp.client\\src\\pages\\todomanager.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E58671DA-68EA-48CC-911F-5501516239F6}|todoapp.client\\todoapp.client.esproj|e:\\projects\\dotnetweb\\todoapp\\todoapp.client\\src\\pages\\todos\\createtodo.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{E58671DA-68EA-48CC-911F-5501516239F6}|todoapp.client\\todoapp.client.esproj|solutionrelative:todoapp.client\\src\\pages\\todos\\createtodo.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E58671DA-68EA-48CC-911F-5501516239F6}|todoapp.client\\todoapp.client.esproj|e:\\projects\\dotnetweb\\todoapp\\todoapp.client\\src\\lib\\functions.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{E58671DA-68EA-48CC-911F-5501516239F6}|todoapp.client\\todoapp.client.esproj|solutionrelative:todoapp.client\\src\\lib\\functions.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1BB771-61EE-4382-A373-72628666EB15}|ToDoApp.API\\ToDoApp.API.csproj|e:\\projects\\dotnetweb\\todoapp\\todoapp.api\\todoapp.api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{0B1BB771-61EE-4382-A373-72628666EB15}|ToDoApp.API\\ToDoApp.API.csproj|solutionrelative:todoapp.api\\todoapp.api.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1BB771-61EE-4382-A373-72628666EB15}|ToDoApp.API\\ToDoApp.API.csproj|e:\\projects\\dotnetweb\\todoapp\\todoapp.api\\controllers\\todoservicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1BB771-61EE-4382-A373-72628666EB15}|ToDoApp.API\\ToDoApp.API.csproj|solutionrelative:todoapp.api\\controllers\\todoservicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1BB771-61EE-4382-A373-72628666EB15}|ToDoApp.API\\ToDoApp.API.csproj|e:\\projects\\dotnetweb\\todoapp\\todoapp.api\\services\\todoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1BB771-61EE-4382-A373-72628666EB15}|ToDoApp.API\\ToDoApp.API.csproj|solutionrelative:todoapp.api\\services\\todoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1BB771-61EE-4382-A373-72628666EB15}|ToDoApp.API\\ToDoApp.API.csproj|e:\\projects\\dotnetweb\\todoapp\\todoapp.api\\models\\todo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1BB771-61EE-4382-A373-72628666EB15}|ToDoApp.API\\ToDoApp.API.csproj|solutionrelative:todoapp.api\\models\\todo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0B1BB771-61EE-4382-A373-72628666EB15}|ToDoApp.API\\ToDoApp.API.csproj|e:\\projects\\dotnetweb\\todoapp\\todoapp.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0B1BB771-61EE-4382-A373-72628666EB15}|ToDoApp.API\\ToDoApp.API.csproj|solutionrelative:todoapp.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 199,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "main.jsx",
+              "DocumentMoniker": "E:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\src\\main.jsx",
+              "RelativeDocumentMoniker": "todoapp.client\\src\\main.jsx",
+              "ToolTip": "E:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\src\\main.jsx",
+              "RelativeToolTip": "todoapp.client\\src\\main.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-11-30T19:59:21.165Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "App.jsx",
+              "DocumentMoniker": "E:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\src\\App.jsx",
+              "RelativeDocumentMoniker": "todoapp.client\\src\\App.jsx",
+              "ToolTip": "E:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\src\\App.jsx",
+              "RelativeToolTip": "todoapp.client\\src\\App.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-11-30T20:00:10.083Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "react-dom.development.js",
+              "DocumentMoniker": "e:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\node_modules\\react-dom\\cjs\\react-dom.development.js",
+              "RelativeDocumentMoniker": "todoapp.client\\node_modules\\react-dom\\cjs\\react-dom.development.js",
+              "ToolTip": "e:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\node_modules\\react-dom\\cjs\\react-dom.development.js",
+              "RelativeToolTip": "todoapp.client\\node_modules\\react-dom\\cjs\\react-dom.development.js",
+              "ViewState": "AgIAAEJpAAAAAAAAAAAYwFFpAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-12-26T15:19:27.38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ToDoCard.jsx",
+              "DocumentMoniker": "E:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\src\\pages\\ToDos\\ToDoCard.jsx",
+              "RelativeDocumentMoniker": "todoapp.client\\src\\pages\\ToDos\\ToDoCard.jsx",
+              "ToolTip": "E:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\src\\pages\\ToDos\\ToDoCard.jsx",
+              "RelativeToolTip": "todoapp.client\\src\\pages\\ToDos\\ToDoCard.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-12-26T14:55:30.532Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ViewToDos.jsx",
+              "DocumentMoniker": "E:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\src\\pages\\ToDos\\ViewToDos.jsx",
+              "RelativeDocumentMoniker": "todoapp.client\\src\\pages\\ToDos\\ViewToDos.jsx",
+              "ToolTip": "E:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\src\\pages\\ToDos\\ViewToDos.jsx",
+              "RelativeToolTip": "todoapp.client\\src\\pages\\ToDos\\ViewToDos.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-12-26T14:53:41.994Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ToDoApp.API.http",
+              "DocumentMoniker": "E:\\Projects\\DotNetWeb\\TodoApp\\ToDoApp.API\\ToDoApp.API.http",
+              "RelativeDocumentMoniker": "ToDoApp.API\\ToDoApp.API.http",
+              "ToolTip": "E:\\Projects\\DotNetWeb\\TodoApp\\ToDoApp.API\\ToDoApp.API.http",
+              "RelativeToolTip": "ToDoApp.API\\ToDoApp.API.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2024-12-26T14:50:09.386Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "CreateToDo.jsx",
+              "DocumentMoniker": "E:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\src\\pages\\ToDos\\CreateToDo.jsx",
+              "RelativeDocumentMoniker": "todoapp.client\\src\\pages\\ToDos\\CreateToDo.jsx",
+              "ToolTip": "E:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\src\\pages\\ToDos\\CreateToDo.jsx",
+              "RelativeToolTip": "todoapp.client\\src\\pages\\ToDos\\CreateToDo.jsx",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAACsAAABrAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-12-26T14:42:34.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ToDoManager.jsx",
+              "DocumentMoniker": "E:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\src\\pages\\ToDoManager.jsx",
+              "RelativeDocumentMoniker": "todoapp.client\\src\\pages\\ToDoManager.jsx",
+              "ToolTip": "E:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\src\\pages\\ToDoManager.jsx",
+              "RelativeToolTip": "todoapp.client\\src\\pages\\ToDoManager.jsx",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2024-12-26T14:42:26.516Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ToDo.cs",
+              "DocumentMoniker": "E:\\Projects\\DotNetWeb\\TodoApp\\ToDoApp.API\\Models\\ToDo.cs",
+              "RelativeDocumentMoniker": "ToDoApp.API\\Models\\ToDo.cs",
+              "ToolTip": "E:\\Projects\\DotNetWeb\\TodoApp\\ToDoApp.API\\Models\\ToDo.cs",
+              "RelativeToolTip": "ToDoApp.API\\Models\\ToDo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-26T14:14:07.506Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Projects\\DotNetWeb\\TodoApp\\ToDoApp.API\\Program.cs",
+              "RelativeDocumentMoniker": "ToDoApp.API\\Program.cs",
+              "ToolTip": "E:\\Projects\\DotNetWeb\\TodoApp\\ToDoApp.API\\Program.cs",
+              "RelativeToolTip": "ToDoApp.API\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-21T14:45:59.456Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ToDoServiceController.cs",
+              "DocumentMoniker": "E:\\Projects\\DotNetWeb\\TodoApp\\ToDoApp.API\\Controllers\\ToDoServiceController.cs",
+              "RelativeDocumentMoniker": "ToDoApp.API\\Controllers\\ToDoServiceController.cs",
+              "ToolTip": "E:\\Projects\\DotNetWeb\\TodoApp\\ToDoApp.API\\Controllers\\ToDoServiceController.cs",
+              "RelativeToolTip": "ToDoApp.API\\Controllers\\ToDoServiceController.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAABoAAAA/AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-20T16:18:52.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "ToDoService.cs",
+              "DocumentMoniker": "E:\\Projects\\DotNetWeb\\TodoApp\\ToDoApp.API\\Services\\ToDoService.cs",
+              "RelativeDocumentMoniker": "ToDoApp.API\\Services\\ToDoService.cs",
+              "ToolTip": "E:\\Projects\\DotNetWeb\\TodoApp\\ToDoApp.API\\Services\\ToDoService.cs",
+              "RelativeToolTip": "ToDoApp.API\\Services\\ToDoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-20T15:10:05.618Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "functions.js",
+              "DocumentMoniker": "E:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\src\\lib\\functions.js",
+              "RelativeDocumentMoniker": "todoapp.client\\src\\lib\\functions.js",
+              "ToolTip": "E:\\Projects\\DotNetWeb\\TodoApp\\todoapp.client\\src\\lib\\functions.js",
+              "RelativeToolTip": "todoapp.client\\src\\lib\\functions.js",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAwCkAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
+              "WhenOpened": "2024-12-19T19:52:48.579Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

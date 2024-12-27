@@ -1,0 +1,27 @@
+@ToDoApp.API_HostAddress = http://localhost:5044
+
+
+GET {{ToDoApp.API_HostAddress}}/ToDoService/GetToDos
+Accept: application/json
+
+###
+
+POST {{ToDoApp.API_HostAddress}}/ToDoService/GetToDo
+Accept: application/json
+Content-Type: application/json
+{
+  "id": 1
+}
+
+###
+
+POST {{ToDoApp.API_HostAddress}}/ToDoService/CreateToDo
+Accept: application/json
+Content-Type: application/json
+{
+
+  "name": "Test Posting a ToDo",
+  "description": "Test that post works",
+  "isCompleted": true
+
+}

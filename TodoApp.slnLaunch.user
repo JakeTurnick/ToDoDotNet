@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "todoapp.client\\todoapp.client.esproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "ToDoApp.API\\ToDoApp.API.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
