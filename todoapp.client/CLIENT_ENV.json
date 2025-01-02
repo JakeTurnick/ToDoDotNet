@@ -1,0 +1,4 @@
+{
+  "API_SERVER_PORT": "https://localhost:7152",
+  "CLIENT_PORT": "https://localhost:5173"
+}

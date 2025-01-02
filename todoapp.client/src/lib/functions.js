@@ -10,6 +10,8 @@ export async function callAPIAsync(controller, endpoint, method, params) {
     let APIURI = `https://localhost:7152/${controller}/${endpoint}`;
     method = method.toUpperCase();
 
+    
+
     let data;
     switch (method) {
         case "GET":
@@ -18,15 +20,22 @@ export async function callAPIAsync(controller, endpoint, method, params) {
                 const response = await fetch(APIURI, {
                     method: "GET",
                 });
+
+                // Check if the response is successful (status code 200-299)
                 if (!response.ok) {
-                    throw new Error(` Error Response status ${response.status}`)
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                data = await response.json();
-                
+
+                // Parse the response data as JSON
+                const data = await response.json();
+
+                // Return the fulfilled data
+                return data;
+
             } catch (error) {
                 console.error("Caught error", error.message)
             }
-            return data;
+            break;
 
         case "POST":
             try {
@@ -40,13 +49,14 @@ export async function callAPIAsync(controller, endpoint, method, params) {
                 if (!response.ok) {
                     console.error(response)
                     throw new Error(` Error Response status ${response.status}`)
-                    
+
                 }
                 data = await response.json();
+                return data;
             } catch (error) {
                 console.error("Caught error", error.message)
             }
-            return data;
+            break;
 
         case "PUT":
             try {

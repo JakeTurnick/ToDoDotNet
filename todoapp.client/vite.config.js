@@ -7,6 +7,23 @@ import path from 'path';
 import child_process from 'child_process';
 import { env } from 'process';
 
+// Read environment variables from a JSON file
+const envJsonPath = path.resolve("./", 'CLIENT_ENV.json');
+let envJson = {};
+if (fs.existsSync(envJsonPath)) {
+    try {
+        const data = fs.readFileSync(envJsonPath, 'utf-8');
+        envJson = JSON.parse(data);
+    } catch (error) {
+        console.error('Error reading or parsing env.json:', error);
+    }
+}
+
+// Merge JSON environment variables with process.env
+Object.keys(envJson).forEach(key => {
+    env[key] = envJson[key];
+});
+
 const baseFolder =
     env.APPDATA !== undefined && env.APPDATA !== ''
         ? `${env.APPDATA}/ASP.NET/https`
