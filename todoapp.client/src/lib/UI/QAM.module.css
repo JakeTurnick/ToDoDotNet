@@ -1,0 +1,60 @@
+.QAM_Container {
+    height: 100vh;
+    min-width: 10rem;
+    display: flex;
+    flex-direction: column;
+    
+    padding: .5rem;
+    border: 2px solid cyan;
+
+    transition: width linear .2s;
+}
+
+.QAM_Container.open {
+    max-width: 400px;
+}
+
+.QAM_Container.closed {
+    width: 50vw;
+}
+
+.QAM_Nav > * {
+    margin: .5rem 0rem;
+}
+
+.QAM_Header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.QAM_Access_btn {
+    transition: transform linear .2s;
+}
+
+.QAM_Access_btn.open {
+    transform: rotate(0);
+}
+
+.QAM_Access_btn.closed {
+    transform: rotate(180deg);
+}
+
+
+/* QAM Items */
+
+.QAM_Item_Body {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.QAM_Item_Body:first-child {
+    justify-self: start;
+}
+
+.QAM_Item_btn {
+    width: 100%;
+}
