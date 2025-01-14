@@ -1,5 +1,10 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using ToDoApp.API.Data;
+using ToDoApp.API.Extensions;
+using ToDoApp.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +14,15 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
+
+builder.Services.AddSwagger(); // From extension
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<AppIdentityDbContext>(options =>
+    options.UseInMemoryDatabase("InMemDB"));
+builder.RegisterAuthentication();
+builder.Services.AddScoped<IdentityService>();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("DevOrigin", builder =>
@@ -19,11 +32,7 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader();
     });
 });
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, 
-    options => builder.Configuration.Bind("JwtSettings", options))
-    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme,
-    options => builder.Configuration.Bind("CookieSettings", options));
+
 
 var app = builder.Build();
 
@@ -31,6 +40,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    app.UseSwagger();
     app.UseSwaggerUI();
 }
 

@@ -1,22 +1,23 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using ToDoApp.API.Services;
+using ToDoApp.API.Data;
 
 namespace ToDoApp.API.Controllers
 {
     [ApiController]
+    [Route("[controller]")]
     public class AccountsController : ControllerBase
     {
-        private readonly IdentityDbContext _context;
+        private readonly AppIdentityDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IdentityService _identityService;
 
-        public AccountsController(IdentityDbContext context, UserManager<IdentityUser> userManager,
+        public AccountsController(AppIdentityDbContext context, UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager, IdentityService identityService,
             SignInManager<IdentityUser> signInManager)
         {

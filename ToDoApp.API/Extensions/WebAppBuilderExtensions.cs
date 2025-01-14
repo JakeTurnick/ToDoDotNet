@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using ToDoApp.API.Data;
 using ToDoApp.API.Options;
 
 namespace ToDoApp.API.Extensions
@@ -54,7 +55,7 @@ namespace ToDoApp.API.Extensions
             })
                 .AddRoles<IdentityRole>()
                 .AddSignInManager()
-                .AddEntityFrameworkStores<IdentityDbContext>();
+                .AddEntityFrameworkStores<AppIdentityDbContext>();
 
             return builder;
         }

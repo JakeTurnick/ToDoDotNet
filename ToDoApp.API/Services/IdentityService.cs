@@ -18,7 +18,7 @@ namespace ToDoApp.API.Services;
 public class IdentityService
 {
     private readonly JwtSettings? _settings;
-    private readonly Byte[] _key;
+    private readonly byte[] _key;
 
     public IdentityService(IOptions<JwtSettings?> JwtOptions)
     {

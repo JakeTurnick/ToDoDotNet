@@ -1,5 +1,156 @@
 [
   {
+    "ContainingType": "ToDoApp.API.Controllers.AccountsController",
+    "Method": "Login",
+    "RelativePath": "Accounts/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "login",
+        "Type": "LoginUser",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ToDoApp.API.Controllers.AccountsController",
+    "Method": "Register",
+    "RelativePath": "Accounts/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerUser",
+        "Type": "RegisterUser",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ToDoApp.API.Controllers.AuthedToDoServiceController",
+    "Method": "AdminGetToDos",
+    "RelativePath": "AuthedToDoService/AdminGetToDos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[ToDoApp.API.Models.ToDo, ToDoApp.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ToDoApp.API.Controllers.AuthedToDoServiceController",
+    "Method": "CreateToDo",
+    "RelativePath": "AuthedToDoService/CreateToDo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "toDo",
+        "Type": "ToDoApp.API.Models.ToDo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ToDoApp.API.Controllers.AuthedToDoServiceController",
+    "Method": "DeleteToDo",
+    "RelativePath": "AuthedToDoService/DeleteToDo",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ToDoApp.API.Controllers.AuthedToDoServiceController",
+    "Method": "GetToDo",
+    "RelativePath": "AuthedToDoService/GetToDo",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "System.Text.Json.Nodes.JsonObject",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ToDoApp.API.Models.ToDo",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ToDoApp.API.Controllers.AuthedToDoServiceController",
+    "Method": "GetToDos",
+    "RelativePath": "AuthedToDoService/GetToDos",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.List\u00601[[ToDoApp.API.Models.ToDo, ToDoApp.API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ToDoApp.API.Controllers.AuthedToDoServiceController",
+    "Method": "UpdateToDo",
+    "RelativePath": "AuthedToDoService/UpdateToDo",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "toDo",
+        "Type": "ToDoApp.API.Models.ToDo",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "ToDoApp.API.Controllers.TestController",
     "Method": "Greet",
     "RelativePath": "Test",
