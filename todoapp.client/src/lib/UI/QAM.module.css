@@ -1,21 +1,21 @@
 .QAM_Container {
     height: 100vh;
-    min-width: 10rem;
+
     display: flex;
     flex-direction: column;
-    
-    padding: .5rem;
+    padding: 0 .5rem;
+    box-sizing: border-box;
     border: 2px solid cyan;
-
     transition: width linear .2s;
 }
 
 .QAM_Container.open {
-    max-width: 400px;
+    width: 400px;
 }
 
 .QAM_Container.closed {
-    width: 50vw;
+    width: 10vw;
+    min-width: max-content;
 }
 
 .QAM_Nav > * {
@@ -34,11 +34,11 @@
 }
 
 .QAM_Access_btn.open {
-    transform: rotate(0);
+    transform: rotate(180deg);
 }
 
 .QAM_Access_btn.closed {
-    transform: rotate(180deg);
+    transform: rotate(0);
 }
 
 

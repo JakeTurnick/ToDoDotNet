@@ -9,7 +9,7 @@ export default function ToDoCard({ toDo }) {
             return
         } else {
             setTodo(toDo)
-            console.log(toDo, toDo.name)
+            //console.log(toDo, toDo.name)
         }
     }, [])
     

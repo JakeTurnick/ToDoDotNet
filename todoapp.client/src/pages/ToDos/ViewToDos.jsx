@@ -7,18 +7,18 @@ export default function ViewToDos() {
     const [ToDos, setToDos] = useState([]);
     useEffect(() => {
         
-        /*callAPIAsync("ToDoService", "GetToDos", "GET")
+        callAPIAsync("ToDoService", "GetToDos", "GET")
             .then(data => {
                 if (data.error) {
                     console.error("CallAPI Error: ", data.error)
                 } else {
-                    console.log(data)
+                    //console.log(data)
                     setToDos(data)
                 }
-            })*/
+            })
 
             // test code
-        setToDos([
+        /*setToDos([
             {
                 name: "first todo",
                 description: "first static todo",
@@ -73,7 +73,7 @@ export default function ViewToDos() {
                 isCompleted: false,
                 id: 8
             },
-       ])
+       ])*/
 
     }, [])
 
@@ -85,7 +85,6 @@ export default function ViewToDos() {
             <section>
                 {ToDos ?
                     ToDos.map(todo => {
-                        console.log("todo map", todo.name)
                         return <ToDoCard key={todo.id} toDo={todo} />
                     })
                     : ""}
