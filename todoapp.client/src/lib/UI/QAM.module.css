@@ -6,11 +6,13 @@
     padding: 0 .5rem;
     box-sizing: border-box;
     border: 2px solid cyan;
-    transition: width linear .2s;
+    transition: width linear .4s;
+
+    
 }
 
 .QAM_Container.open {
-    width: 400px;
+    width: 300px;
 }
 
 .QAM_Container.closed {
@@ -27,6 +29,22 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    box-sizing: border-box;
+    padding: .25rem;
+}
+
+.QAM_Header > p {
+    margin: 0;
+    padding: 0;
+    transition: font-size .2s linear .2s;
+}
+
+.QAM_Header > p.open {
+    font-size: 1rem;
+}
+
+.QAM_Header > p.closed {
+    font-size: 0rem;
 }
 
 .QAM_Access_btn {
@@ -57,4 +75,19 @@
 
 .QAM_Item_btn {
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.QAM_Item_btn > p {
+    margin: 0rem;
+    padding: 0rem;
+    transition: font-size .2s linear .2s;
+}
+
+.QAM_Item_btn > p.open {
+    font-size: 1rem;
+}
+.QAM_Item_btn > p.closed {
+    font-size: 0rem;
 }
