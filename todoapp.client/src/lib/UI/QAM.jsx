@@ -8,8 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function QAM() {
     const [isOpen, setIsOpen] = useState(false);
 
-    console.log("QAM isOpen ", isOpen)
-
     return (
         <section className={`${styles.QAM_Container} ${isOpen ? styles.open : styles.closed}`}>
             <article className={styles.QAM_Header}>

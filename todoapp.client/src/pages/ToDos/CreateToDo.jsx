@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react'
-import { updateStateField, callAPIAsync } from '@/lib/functions.js'
+import { useState, useEffect } from 'react';
+import { updateStateField, callAPIAsync } from '@/lib/functions.js';
+import Styles from './CreateToDo.module.css';
 
-export default function CreateToDo() {
 
+export default function CreateToDo(props) {
     // Set page vars
     const todaysDate = new Date()
     const today = todaysDate.toJSON().slice(0, 10);
@@ -18,7 +19,6 @@ export default function CreateToDo() {
         endDate: tomorrow,
     });
  
-    
     // testing funs
     function logCurrentToDo() {
         console.log(newTodo)
@@ -26,32 +26,33 @@ export default function CreateToDo() {
     window.logCurrentToDo = logCurrentToDo;
 
     
-
     return (
-        <>
-            <h1>Create a new todo</h1>
-            <form
-                style={{
-                    display: "flex",
-                    flexDirection: "column"
-                }}>
-                <section style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    padding: "10px"
-                }}>
-                    <h1>New Todo: </h1>
-                    <input type="text" name="Name" placeholder="Exciting task name here!" onInput={(e) => {
-                        updateStateField(newTodo, setNewTodo, "Name", e.target.value)
-                    }}></input>
-                </section>
-                <textarea type="textarea" name="Description" placeholder="What is this task about" rows={10} onChange={(e) => { updateStateField(newTodo, setNewTodo, "Description", e.target.value) }}></textarea>
-                <input type="date" name="StartDate" value={today} onChange={(e) => { updateStateField(newTodo, setNewTodo, "startDate", e.target.value) }}></input>
-                <input type="date" name="StartDate" value={tomorrow} onChange={(e) => { updateStateField(newTodo, setNewTodo, "endtDate", e.target.value) }}></input>
+        <div className={Styles.ModalBackGround} onClick={() => {props.closeCreateModal() }}>
+            <div className={Styles.ModalBody} onClick={(e) => {e.stopPropagation() } }>
+                <h1>Create a new todo</h1>
+                <form
+                    style={{
+                        display: "flex",
+                        flexDirection: "column"
+                    }}>
+                    <section style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        padding: "10px"
+                    }}>
+                        <h1>New Todo: </h1>
+                        <input type="text" name="Name" placeholder="Exciting task name here!" onInput={(e) => {
+                            updateStateField(newTodo, setNewTodo, "Name", e.target.value)
+                        }}></input>
+                    </section>
+                    <textarea type="textarea" name="Description" placeholder="What is this task about" rows={10} onChange={(e) => { updateStateField(newTodo, setNewTodo, "Description", e.target.value) }}></textarea>
+                    <input type="date" name="StartDate" value={today} onChange={(e) => { updateStateField(newTodo, setNewTodo, "startDate", e.target.value) }}></input>
+                    <input type="date" name="StartDate" value={tomorrow} onChange={(e) => { updateStateField(newTodo, setNewTodo, "endtDate", e.target.value) }}></input>
 
-            </form>
-            <button onClick={() => { callAPIAsync("ToDoService", "CreateToDo", "POST", newTodo) }}>Submit</button>
-        </>
+                </form>
+                <button onClick={() => { callAPIAsync("ToDoService", "CreateToDo", "POST", newTodo) }}>Submit</button>
+            </div>
+        </div>
     )
 }
 
