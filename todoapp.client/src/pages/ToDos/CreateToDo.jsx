@@ -13,7 +13,7 @@ export default function CreateToDo(props) {
     const tomorrow = tomorrowsDate.toJSON().slice(0, 10);
 
     // Create state using page vars
-    const [newTodo, setNewTodo] = useState({
+    const [newTodo, setNewTodo] = useState(props.toDo ? props.toDo : {
         Name: "",
         Description: "",
         startDate: today,
@@ -54,6 +54,7 @@ export default function CreateToDo(props) {
                         if (validateTodo()) {
                             callAPIAsync("ToDoService", "CreateToDo", "POST", newTodo);
                             props.closeCreateModal();
+                            props.fetchToDos();
                         } else {
                             console.log("not valid todo")
                         }

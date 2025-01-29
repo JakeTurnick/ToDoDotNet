@@ -16,10 +16,10 @@ export default function ToDoCard({ toDo }) {
     return (
         <article className={styles.ToDoCard}>
           <h3>{todo.name ? toDo.name : "No name available"}</h3>
-          <p>{todo.description}</p>
+            <p>{todo.description}</p>
           <input type="checkbox" value={todo.isCompleted} readOnly={true } />
           <p>{todo.startDate}</p>
-          <p>{todo.endDate}</p>
+            <p>{todo.endDate}</p>
       </article>
   );
 }

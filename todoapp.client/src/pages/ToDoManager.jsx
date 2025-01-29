@@ -1,18 +1,33 @@
-import { Link, Outlet } from 'react-router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { callAPIAsync } from "@/lib/functions.js"
 import CreateToDo from "./ToDos/CreateToDo";
+import ViewToDos from './ToDos/ViewToDos';
 
 export default function ToDoManager() {
     const [showModal, setShowModal] = useState(false);
+    const [toDos, setToDos] = useState([]);
 
     function closeCreateModal() {
         setShowModal(false)
     }
 
-    function closeAndRefresh() {
-        // idk yet, but intention for future
+    async function fetchToDos() {
+        await callAPIAsync("ToDoService", "GetToDos", "GET")
+            .then(data => {
+                if (data.error) {
+                    console.error("CallAPI Error: ", data.error)
+                } else {
+                    console.log(data)
+                    setToDos(data)
+                }
+            });
     }
+
+    useEffect(() => {
+        fetchToDos()
+    }, [])
+
     return (
         <>
             <h3>ToDos go here</h3>
@@ -22,10 +37,10 @@ export default function ToDoManager() {
                 Create with portal
             </button>
             {showModal && createPortal(
-                <CreateToDo closeCreateModal={closeCreateModal } />,
+                <CreateToDo closeCreateModal={closeCreateModal} fetchToDos={fetchToDos } />,
                 document.body
             )}
-            <Outlet />
+            <ViewToDos ToDos={toDos} />
         </>
     )
 }
