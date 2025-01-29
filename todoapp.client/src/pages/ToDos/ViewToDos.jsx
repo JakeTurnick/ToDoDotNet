@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import ToDoCard from "./ToDoCard";
-import { callAPIAsync } from '../../lib/functions.js';
+import { callAPIAsync } from '@/lib/functions.js';
 import "./ViewToDos.module.css"
 
 export default function ViewToDos() {

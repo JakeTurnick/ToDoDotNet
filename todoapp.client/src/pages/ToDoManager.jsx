@@ -9,6 +9,10 @@ export default function ToDoManager() {
     function closeCreateModal() {
         setShowModal(false)
     }
+
+    function closeAndRefresh() {
+        // idk yet, but intention for future
+    }
     return (
         <>
             <h3>ToDos go here</h3>
