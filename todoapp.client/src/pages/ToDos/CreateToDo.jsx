@@ -12,13 +12,22 @@ export default function CreateToDo(props) {
     tomorrowsDate.setDate(tomorrowsDate.getDate() + 1);
     const tomorrow = tomorrowsDate.toJSON().slice(0, 10);
 
+    if (props.todo?.id !== null && props.todo?.id !== undefined) {
+        console.log("editing todo", props.todo?.id)
+        // use to change method
+    }
+
+    console.log("todo prop", props.todo)
     // Create state using page vars
-    const [newTodo, setNewTodo] = useState(props.toDo ? props.toDo : {
-        Name: "",
-        Description: "",
-        startDate: today,
-        endDate: tomorrow,
-    });
+    const [newTodo, setNewTodo] = useState(props.todo ? props.todo :
+        {
+            name: "",
+            description: "",
+            startDate: today,
+            endDate: tomorrow,
+        }
+    );
+
 
     function validateTodo() {
         if (newTodo.Name.length > 0) {
@@ -36,24 +45,24 @@ export default function CreateToDo(props) {
 
     
     return (
-        <div className={UniStyles.ModalBackGround} onClick={() => {props.closeCreateModal() }}>
-            <div className={UniStyles.ModalBody} onClick={(e) => {e.stopPropagation() } }>
-                <input required type="text" name="Name" placeholder="Exciting task name here!"
+        <div className={UniStyles.ModalBackGround} onClick={() => { props.closeToDoModal() }} >
+            <div className={UniStyles.ModalBody} onClick={(e) => { e.stopPropagation() }}>
+                <input required type="text" name="name" value={newTodo.name} placeholder="Exciting task name here!"
                     className={`${UniStyles.generic_input}` }
                     onInput={(e) => {
-                    updateStateField(newTodo, setNewTodo, "Name", e.target.value)
+                    updateStateField(newTodo, setNewTodo, "name", e.target.value)
                 }}></input>
-                <textarea className={`${UniStyles.generic_input}`} type="textarea" name="Description" placeholder="What is this task about" rows={10} onChange={(e) => { updateStateField(newTodo, setNewTodo, "Description", e.target.value) }}></textarea>
-                <section className={`${Styles.DualSection} ${UniStyles.generic_input}` }>
-                    <input className={`${Styles.input_date} ${UniStyles.generic_input}`} type="date" name="StartDate" value={today} onChange={(e) => { updateStateField(newTodo, setNewTodo, "startDate", e.target.value) }}></input>
-                    <input className={`${Styles.input_date} ${UniStyles.generic_input}`} type="date" name="StartDate" value={tomorrow} onChange={(e) => { updateStateField(newTodo, setNewTodo, "endtDate", e.target.value) }}></input>
+                <textarea className={`${UniStyles.generic_input}`} type="textarea" name="description" value={newTodo.description } placeholder="What is this task about" rows={10} onChange={(e) => { updateStateField(newTodo, setNewTodo, "description", e.target.value) }}></textarea>
+                <section className={`${Styles.DualSection} ${UniStyles.generic_input}`}>
+                    <input className={`${Styles.input_date} ${UniStyles.generic_input}`} type="date" name="startDate" value={newTodo.startDate} onChange={(e) => { updateStateField(newTodo, setNewTodo, "startDate", e.target.value) }}></input>
+                    <input className={`${Styles.input_date} ${UniStyles.generic_input}`} type="date" name="endDate" value={newTodo.endDate} onChange={(e) => { updateStateField(newTodo, setNewTodo, "endtDate", e.target.value) }}></input>
                 </section>
                 <section className={`${UniStyles.DualSection}`}>
-                    <button onClick={() => { props.closeCreateModal(); }}>Cancel</button>
+                    <button onClick={() => { props.closeToDoModal(); }}>Cancel</button>
                     <button onClick={() => {
                         if (validateTodo()) {
                             callAPIAsync("ToDoService", "CreateToDo", "POST", newTodo);
-                            props.closeCreateModal();
+                            props.closeToDoModal();
                             props.fetchToDos();
                         } else {
                             console.log("not valid todo")

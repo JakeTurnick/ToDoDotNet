@@ -1,7 +1,7 @@
 import ToDoCard from "./ToDoCard";
 import "./ViewToDos.module.css"
 
-export default function ViewToDos({ToDos }) {
+export default function ViewToDos({ ToDos, showToDoModal }) {
     
     return (
         <>
@@ -10,7 +10,7 @@ export default function ViewToDos({ToDos }) {
             <section>
                 {ToDos ?
                     ToDos.map(todo => {
-                        return <ToDoCard key={todo.id} toDo={todo} />
+                        return <ToDoCard key={todo.id} toDo={todo} showToDoModal={showToDoModal } />
                     })
                     : ""}
             </section>

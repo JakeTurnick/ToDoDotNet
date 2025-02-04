@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import styles from "./ToDoCard.module.css"
 
-export default function ToDoCard({ toDo }) {
+export default function ToDoCard({ toDo, showToDoModal }) {
+    
     const [todo, setTodo] = useState({});
     useEffect(() => {
         if (toDo == null) {
@@ -20,6 +21,7 @@ export default function ToDoCard({ toDo }) {
           <input type="checkbox" value={todo.isCompleted} readOnly={true } />
           <p>{todo.startDate}</p>
             <p>{todo.endDate}</p>
+            <button onClick={() => showToDoModal(todo.id) }>Edit</button>
       </article>
   );
 }
