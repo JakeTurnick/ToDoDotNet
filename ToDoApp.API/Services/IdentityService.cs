@@ -50,7 +50,8 @@ public class IdentityService
         return new SecurityTokenDescriptor()
         {
             Subject = identity,
-            Expires = DateTime.Now.AddHours(2),
+            NotBefore = DateTime.UtcNow,
+            Expires = DateTime.UtcNow.AddHours(2),
             Audience = _settings!.Audiences?[0],
             Issuer = _settings.Issuer,
             SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(_key),

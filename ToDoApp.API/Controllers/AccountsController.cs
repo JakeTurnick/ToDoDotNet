@@ -52,7 +52,10 @@ namespace ToDoApp.API.Controllers
                     role = new IdentityRole("Admin");
                     await _roleManager.CreateAsync(role);
                 }
-                await _userManager.AddToRoleAsync(identity, "Admin");
+                if (!await _userManager.IsInRoleAsync(identity, "Admin"))
+                {
+                    await _userManager.AddToRoleAsync(identity, "Admin");
+                }
 
                 newClaims.Add(new Claim(ClaimTypes.Role, "Admin"));
             }

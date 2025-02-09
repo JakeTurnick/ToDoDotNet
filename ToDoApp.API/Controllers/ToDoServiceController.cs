@@ -23,10 +23,10 @@ namespace ToDoApp.API.Controllers
         }
 
         // So I can have it accept JsonObjects or I can just work with attributes
-        [HttpPost]
-        public ActionResult<ToDo> GetToDo([FromBody] JsonObject request)
+        [HttpGet("{id}")]
+        public ActionResult<ToDo> GetToDo(int id)
         {
-            var result = ToDoService.Get(request["id"].GetValue<int>());
+            var result = ToDoService.Get(id);
             //var result = ToDoService.Get(id);
 
             if (result == null) NotFound();

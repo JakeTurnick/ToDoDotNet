@@ -4,7 +4,8 @@
     "Projects": [
       {
         "Path": "todoapp.client\\todoapp.client.esproj",
-        "Action": "Start"
+        "Action": "Start",
+        "DebugTarget": "localhost (Chrome)"
       },
       {
         "Path": "ToDoApp.API\\ToDoApp.API.csproj",

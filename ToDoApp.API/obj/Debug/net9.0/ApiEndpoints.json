@@ -195,14 +195,14 @@
   {
     "ContainingType": "ToDoApp.API.Controllers.ToDoServiceController",
     "Method": "GetToDo",
-    "RelativePath": "ToDoService/GetToDo",
-    "HttpMethod": "POST",
+    "RelativePath": "ToDoService/GetToDo/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "request",
-        "Type": "System.Text.Json.Nodes.JsonObject",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
