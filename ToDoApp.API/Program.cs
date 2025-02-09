@@ -18,10 +18,17 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwagger(); // From extension
 builder.Services.AddSwaggerGen();
 
+var connectionString = builder.Configuration.GetConnectionString("DatabaseConnection")
+    ?? throw new InvalidOperationException("Connection string" + "'DefaultConnection' not found.");
+builder.Services.AddDbContext<ToDoDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+
 builder.Services.AddDbContext<AppIdentityDbContext>(options =>
     options.UseInMemoryDatabase("InMemDB"));
 builder.RegisterAuthentication();
-builder.Services.AddScoped<IdentityService>();
+//builder.Services.AddScoped<IdentityService>();
+
 
 builder.Services.AddCors(options =>
 {
@@ -35,6 +42,12 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
+
+//using (var scope = app.Services.CreateScope())
+//{
+//    var services = scope.ServiceProvider;
+//    await WebApplicationBuilderExtensions.CreateRoles(services);
+//}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
