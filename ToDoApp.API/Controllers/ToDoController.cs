@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ToDoApp.API.Data;
 using ToDoApp.API.Models;
@@ -18,8 +20,31 @@ namespace ToDoApp.API.Controllers
         [HttpGet]
         public ActionResult<List<ToDo>> GetToDos()
         {
-            var toDos = _dbContext.ToDos.FromSql($"EXECUTE dbo.SelectAllToDos").ToListAsync<ToDo>(;
+            var toDos = _dbContext.ToDos.FromSql($"EXECUTE dbo.SelectAllToDos").ToList<ToDo>();
             return toDos;
+        }
+
+        [HttpPost]
+        public ActionResult<List<ToDo>> PostToDo(ToDo toDo)
+        {
+            var name = new SqlParameter("@Name", toDo.Name);
+            var description = new SqlParameter("@Description", toDo.Description);
+            var startDate = new SqlParameter("@StartDate", toDo.StartDate ?? null);
+            var endDate = new SqlParameter("@EndDate", toDo.EndDate ?? null);
+            var isCompleted = new SqlParameter("@IsCompleted", toDo.IsCompleted);
+            var result = _dbContext.ToDos.FromSqlRaw($"EXECUTE dbo.InsertToDo " +
+                $"@Name, " +
+                $"@Description, " +
+                $"@StartDate, " +
+                $"@EndDate, " +
+                $"@IsCompleted",
+                name,
+                description,
+                startDate,
+                endDate,
+                isCompleted).ToList<ToDo>();
+
+            return result;
         }
     }
 }
