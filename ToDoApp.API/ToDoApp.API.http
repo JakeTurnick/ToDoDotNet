@@ -35,10 +35,8 @@ POST {{ToDoApp.API_HostAddress}}/ToDo/PostTodo
 Accept: application/json
 Content-Type: application/json
 {
-  "Name": "Repl SQL posted todo",
+  "Name": "SQL posted todo",
   "Description": "A todo posting to the SQL server",
-  "IsCompleted": false,
-  "StartDate": "2001/1/1",
-  "EndDate": "2002/2/2"
+  "IsCompleted": false
 }
 ###

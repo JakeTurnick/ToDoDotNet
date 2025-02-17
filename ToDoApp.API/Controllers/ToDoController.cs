@@ -29,20 +29,20 @@ namespace ToDoApp.API.Controllers
         {
             var name = new SqlParameter("@Name", toDo.Name);
             var description = new SqlParameter("@Description", toDo.Description);
-            var startDate = new SqlParameter("@StartDate", toDo.StartDate ?? null);
-            var endDate = new SqlParameter("@EndDate", toDo.EndDate ?? null);
+            var startDate = new SqlParameter("@StartDate", toDo.StartDate.HasValue ? (object)toDo.StartDate.Value : DBNull.Value);
+            var endDate = new SqlParameter("@EndDate", toDo.EndDate.HasValue ? (object)toDo.EndDate.Value : DBNull.Value);
             var isCompleted = new SqlParameter("@IsCompleted", toDo.IsCompleted);
             var result = _dbContext.ToDos.FromSqlRaw($"EXECUTE dbo.InsertToDo " +
                 $"@Name, " +
                 $"@Description, " +
+                $"@IsCompleted, " +
                 $"@StartDate, " +
-                $"@EndDate, " +
-                $"@IsCompleted",
+                $"@EndDate ",
                 name,
                 description,
+                isCompleted,
                 startDate,
-                endDate,
-                isCompleted).ToList<ToDo>();
+                endDate).ToList<ToDo>();
 
             return result;
         }
