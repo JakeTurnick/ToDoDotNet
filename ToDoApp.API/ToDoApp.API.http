@@ -21,7 +21,7 @@ Content-Type: application/json
 {
 
   "name": "Test Posting a ToDo",
-  "description": "Test that post works",
+  "description": "Test that post works (From http file)",
   "isCompleted": true
 
 }
@@ -31,12 +31,53 @@ GET {{ToDoApp.API_HostAddress}}/ToDo/GetToDos
 Accept: application/json
 ###
 
+GET {{ToDoApp.API_HostAddress}}/ToDo/GetToDoById/8
+Accept: application/json
+
+###
+
 POST {{ToDoApp.API_HostAddress}}/ToDo/PostTodo
 Accept: application/json
 Content-Type: application/json
 {
-  "Name": "SQL posted todo",
+  "Name": "To Delete",
   "Description": "A todo posting to the SQL server",
   "IsCompleted": false
 }
+###
+
+# BAD POST
+POST {{ToDoApp.API_HostAddress}}/ToDo/PostTodo
+Accept: application/json
+Content-Type: application/json
+{
+  "Name": "",
+  "Description": "A todo posting to the SQL server",
+  "IsCompleted": false
+}
+###
+
+PATCH {{ToDoApp.API_HostAddress}}/ToDo/UpdateToDo
+Accept: application/json
+Content-Type: application/json
+{
+  "Id": 6,
+  "Name": "Update Target",
+  "Description": "Updated from HTTP file, no dates"
+}
+###
+
+# BAD PATCH
+PATCH {{ToDoApp.API_HostAddress}}/ToDo/UpdateToDo
+Accept: application/json
+Content-Type: application/json
+{
+  "Name": "Update Target",
+  "Description": "Updated from HTTP file, no dates"
+}
+###
+
+DELETE {{ToDoApp.API_HostAddress}}/ToDo/DeleteToDoById/8
+Accept: application/json
+
 ###
