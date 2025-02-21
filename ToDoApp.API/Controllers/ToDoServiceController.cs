@@ -6,7 +6,7 @@ using ToDoApp.API.Services;
 namespace ToDoApp.API.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [Route("ToDoService/[action]")]
     public class ToDoServiceController : ControllerBase
     {
 
