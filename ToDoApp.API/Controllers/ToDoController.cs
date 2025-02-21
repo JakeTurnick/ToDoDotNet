@@ -105,15 +105,26 @@ namespace ToDoApp.API.Controllers
                 return BadRequest("No Id found on request");
             }
 
-            var id = new SqlParameter("@Id", Id);
-            var result = _dbContext.ToDos.FromSqlRaw($"EXECUTE dbo.DeleteToDoById " +
-                $"@Id",
-                id);
+            var idParam = new SqlParameter("@Id", Id);
+            var resultParam = new SqlParameter
+            {
+                ParameterName = "@Result",
+                SqlDbType = System.Data.SqlDbType.Int,
+                Direction = System.Data.ParameterDirection.Output
+            };
 
+            _dbContext.Database.ExecuteSqlRaw("EXEC dbo.DeleteToDoById @Id, @Result OUTPUT", idParam, resultParam);
 
-            // Works 100% of the time - need to have SQL send something back
-            // Check results of sql
-            return Ok(result);
+            int result = (int)resultParam.Value;
+
+            if (result == 0)
+            {
+                return Ok("ToDo deleted successfully.");
+            }
+            else
+            {
+                return NotFound("ToDo not found.");
+            }
         }
     }
 }
