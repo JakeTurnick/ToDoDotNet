@@ -34,9 +34,10 @@ var connectionString = builder.Configuration.GetConnectionString("DatabaseConnec
 builder.Services.AddDbContext<ToDoDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-
+var authConnectionString = builder.Configuration.GetConnectionString("AuthDatabaseConnection")
+    ?? throw new InvalidOperationException("Connection string" + "'AuthDatabaseConnection' not found.");
 builder.Services.AddDbContext<AppIdentityDbContext>(options =>
-    options.UseInMemoryDatabase("InMemDB"));
+    options.UseSqlServer(authConnectionString));
 builder.RegisterAuthentication();
 builder.Services.AddScoped<IdentityService>();
 
