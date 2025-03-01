@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using ToDoApp.API.Data;
 using ToDoApp.API.Models;
 
 namespace ToDoApp.API.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("[controller]/[action]")]
     public class ToDoController : Controller
     {
@@ -17,6 +20,18 @@ namespace ToDoApp.API.Controllers
         {
             _dbContext = dbContext;
         }
+
+        private string GetUserGuid()
+        {
+            return User.FindFirstValue(ClaimTypes.Sid);
+        }
+
+        [HttpGet]
+        public IActionResult TestGetGUID()
+        {
+            return Ok(GetUserGuid());
+        }
+
         [HttpGet]
         public IActionResult GetToDos()
         {

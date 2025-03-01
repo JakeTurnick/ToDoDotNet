@@ -1,7 +1,10 @@
-﻿namespace ToDoApp.API.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ToDoApp.API.Models
 {
     public class User
     {
-        public Guid UserGUID { get; set; }
+        [Required]
+        public string Name { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using ToDoApp.API.Services;
 using ToDoApp.API.Data;
+using ToDoApp.API.Models;
 
 namespace ToDoApp.API.Controllers
 {
@@ -11,13 +12,13 @@ namespace ToDoApp.API.Controllers
     [Route("[controller]")]
     public class AccountsController : ControllerBase
     {
-        private readonly AppIdentityDbContext _context;
+        private readonly ToDoDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IdentityService _identityService;
 
-        public AccountsController(AppIdentityDbContext context, UserManager<IdentityUser> userManager,
+        public AccountsController(ToDoDbContext context, UserManager<IdentityUser> userManager,
             RoleManager<IdentityRole> roleManager, IdentityService identityService,
             SignInManager<IdentityUser> signInManager)
         {
@@ -35,6 +36,11 @@ namespace ToDoApp.API.Controllers
             // Create new IdentityUser. This will persist the user to DB
             var identity = new IdentityUser { Email = registerUser.Email, UserName = registerUser.Email };
             var createdIdentity = await _userManager.CreateAsync(identity, registerUser.Password);
+
+            if (!createdIdentity.Succeeded)
+            {
+                return BadRequest(createdIdentity.Errors);
+            }
 
             var newClaims = new List<Claim>
             {
@@ -76,7 +82,8 @@ namespace ToDoApp.API.Controllers
             var claimsIdentity = new ClaimsIdentity(new Claim[]
             {
                 new(JwtRegisteredClaimNames.Sub, identity.Email ?? throw new InvalidOperationException()),
-                new(JwtRegisteredClaimNames.Email, identity.Email ?? throw new InvalidOperationException())
+                new(JwtRegisteredClaimNames.Email, identity.Email ?? throw new InvalidOperationException()),
+                new(ClaimTypes.Sid, identity.Id)
             });
 
             claimsIdentity.AddClaims(newClaims);
@@ -103,7 +110,8 @@ namespace ToDoApp.API.Controllers
             var claimsIdentity = new ClaimsIdentity(new Claim[]
             {
                 new(JwtRegisteredClaimNames.Sub, user.Email ?? throw new InvalidOperationException()),
-                new(JwtRegisteredClaimNames.Email, user.Email ?? throw new InvalidOperationException())
+                new(JwtRegisteredClaimNames.Email, user.Email ?? throw new InvalidOperationException()),
+                new(ClaimTypes.Sid, user.Id)
             });
 
             claimsIdentity.AddClaims(claims);
@@ -117,6 +125,22 @@ namespace ToDoApp.API.Controllers
 
             var response = new AuthenticationResult(_identityService.WriteToken(token));
             return Ok(response);
+        }
+
+        [HttpPost]
+        [Route("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user is null) return BadRequest("No such user found");
+
+            if (_signInManager.IsSignedIn(User))
+            {
+                await _signInManager.SignOutAsync();
+            }
+
+            
+            return Ok("Logout Successful");
         }
 
     }
