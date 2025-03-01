@@ -6,6 +6,7 @@
 ToDo.*
 
 **/Debug/
+**Migration**
 
 # dotenv files
 .env
