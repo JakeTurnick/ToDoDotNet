@@ -18,3 +18,4 @@ const Logout = () => {
 };
 
 export default Logout;
+// don't need a whole page for a logout
