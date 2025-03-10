@@ -6,6 +6,7 @@ const Logout = () => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
+        console.log("logout redirecting")
         setToken();
         navigate("/", { replace: true });
     };

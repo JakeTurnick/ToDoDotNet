@@ -5,6 +5,7 @@ import App from '@/App.jsx'
 import Logout from '@/pages/Auth/Logout'
 import Login from '@/pages/Auth/Login'
 import ToDoManager from '@/pages/ToDoManager'
+import { PageNotFound } from './PageNotFound'
 
 
 const RouteIndex = () => {
@@ -30,15 +31,18 @@ const RouteIndex = () => {
                         <Route path="/" element={<ProtectedRoute />} >
                             <Route path="/" element={<div>Authed login</div>} />
                             <Route path="ToDos" element={<ToDoManager />} />
+                            <Route path="/logout" element={<Logout />} />
                         </Route>
                         : 
                         /* Not-Auth */
                         <Route path="/">
                             <Route path="/" element={<Login />} />
-                            <Route path="/logout" element={<Logout />} />
+                            
                             <Route path="/register" element={<div>register for an account</div> } />
                         </Route>
                     }
+
+                    <Route path="*" element={<PageNotFound />} />
                 </Route>
             </Routes>
         </BrowserRouter>
