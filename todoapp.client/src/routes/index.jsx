@@ -6,6 +6,8 @@ import Logout from '@/pages/Auth/Logout'
 import Login from '@/pages/Auth/Login'
 import ToDoManager from '@/pages/ToDoManager'
 import { PageNotFound } from './PageNotFound'
+import Register from '@/pages/Auth/Register'
+import NotFoundRedirect from './NotFoundRedirect'
 
 
 const RouteIndex = () => {
@@ -35,14 +37,15 @@ const RouteIndex = () => {
                         </Route>
                         : 
                         /* Not-Auth */
-                        <Route path="/">
-                            <Route path="/" element={<Login />} />
+                        <Route path="/" element={<Login /> }>
+                            <Route path="/login" element={<Login />} />
                             
-                            <Route path="/register" element={<div>register for an account</div> } />
+                            <Route path="/register" element={<Register />} />
                         </Route>
                     }
 
-                    <Route path="*" element={<PageNotFound />} />
+                    <Route path="*" element={<NotFoundRedirect />} />
+                    <Route path="PageNotFound" element={<PageNotFound /> } />
                 </Route>
             </Routes>
         </BrowserRouter>

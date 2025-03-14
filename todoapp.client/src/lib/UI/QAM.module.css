@@ -4,24 +4,17 @@
     display: flex;
     flex-direction: column;
     padding: 0 .5rem;
-    box-sizing: border-box;
     border: 2px solid cyan;
     transition: width linear .4s;
-
-    
 }
 
 .QAM_Container.open {
-    width: 300px;
+    width: 15rem;
 }
 
 .QAM_Container.closed {
-    width: 10vw;
+    width: 5rem;
     min-width: max-content;
-}
-
-.QAM_Nav > * {
-    margin: .5rem 0rem;
 }
 
 .QAM_Header {
@@ -62,32 +55,56 @@
 
 /* QAM Items */
 
+.QAM_Nav > * {
+    margin: .5rem 0rem;
+
+}
+
 .QAM_Item_Body {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    height: 3rem;
     width: 100%;
 }
 
-.QAM_Item_Body:first-child {
-    justify-self: start;
-}
 
 .QAM_Item_btn {
     width: 100%;
+    height: 100%;
     display: flex;
     justify-content: space-between;
 }
 
+
 .QAM_Item_btn > p {
     margin: 0rem;
     padding: 0rem;
-    transition: font-size .2s linear .2s;
+    transition: visibility, opacity, font-size .2s linear .2s;
 }
 
 .QAM_Item_btn > p.open {
     font-size: 1rem;
+    visibility: visible;
+    opacity: 1;
 }
 .QAM_Item_btn > p.closed {
     font-size: 0rem;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.QAM_Item_Icon {
+    align-self: center;
+    transition: margin 1s ease-in 2s, color 1s linear 2s
+}
+
+.QAM_Item_Icon.open {
+    color: red;
+    margin: 0;
+}
+
+.QAM_Item_Icon.closed {
+    color: blue;
+    margin: auto;
 }

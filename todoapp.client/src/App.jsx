@@ -20,7 +20,7 @@ export default function App() {
 
     return (
         <div style={fullDivStyle}>
-            <aside className={styles.SideBar}>
+            <aside className="sticky top-0 left-0 h-dvh">
                 <QAM></QAM>
 
             </aside>
