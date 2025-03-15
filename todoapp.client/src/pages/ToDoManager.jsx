@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { callAPIAsync } from "@/lib/functions.js"
 import CreateToDo from "./ToDos/CreateToDo";
 import ViewToDos from './ToDos/ViewToDos';
+import axios from 'axios'
 
 export default function ToDoManager() {
     const [showModal, setShowModal] = useState(false);
@@ -15,14 +16,21 @@ export default function ToDoManager() {
     })
 
     async function fetchToDos() {
-        await callAPIAsync("ToDoService", "GetToDos", "GET")
-            .then(data => {
-                if (data.error) {
-                    console.error("CallAPI Error: ", data.error)
-                } else {
-                    setToDos(data)
-                }
-            });
+        const response = await callAPIAsync("GET", "ToDoService", "GetToDos");
+        setToDos(response.data)
+        //try {
+        //    const response = await axios({
+        //        method: "get",
+        //        url: "https://localhost:7152/ToDoService/GetToDos",
+        //        responseType: "json"
+        //    })
+
+        //    console.log({response})
+        //    setToDos(response.data)
+        //} catch (error) {
+        //    console.log("axios error ", error)
+        //}
+        
     }
 
     function closeToDoModal() {
