@@ -13,14 +13,14 @@ namespace ToDoApp.API.Controllers
     public class AccountsController : ControllerBase
     {
         private readonly ToDoDbContext _context;
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<IdentityRole<Guid>> _roleManager;
+        private readonly SignInManager<AppUser> _signInManager;
         private readonly IdentityService _identityService;
 
-        public AccountsController(ToDoDbContext context, UserManager<IdentityUser> userManager,
-            RoleManager<IdentityRole> roleManager, IdentityService identityService,
-            SignInManager<IdentityUser> signInManager)
+        public AccountsController(ToDoDbContext context, UserManager<AppUser> userManager,
+            RoleManager<IdentityRole<Guid>> roleManager, IdentityService identityService,
+            SignInManager<AppUser> signInManager)
         {
             _context = context;
             _userManager = userManager;
@@ -34,7 +34,7 @@ namespace ToDoApp.API.Controllers
         public async Task<IActionResult> Register(RegisterUser registerUser)
         {
             // Create new IdentityUser. This will persist the user to DB
-            var identity = new IdentityUser { Email = registerUser.Email, UserName = registerUser.Email };
+            var identity = new AppUser { Email = registerUser.Email, UserName = registerUser.Email };
             var createdIdentity = await _userManager.CreateAsync(identity, registerUser.Password);
 
             if (!createdIdentity.Succeeded)
@@ -55,7 +55,7 @@ namespace ToDoApp.API.Controllers
                 var role = await _roleManager.FindByNameAsync("Admin");
                 if (role == null)
                 {
-                    role = new IdentityRole("Admin");
+                    role = new IdentityRole<Guid>("Admin");
                     await _roleManager.CreateAsync(role);
                 }
                 if (!await _userManager.IsInRoleAsync(identity, "Admin"))
@@ -71,7 +71,7 @@ namespace ToDoApp.API.Controllers
                 var role = await _roleManager.FindByNameAsync("User");
                 if (role == null)
                 {
-                    role = new IdentityRole("User");
+                    role = new IdentityRole<Guid>("User");
                     await _roleManager.CreateAsync(role);
                 }
                 await _userManager.AddToRoleAsync(identity, "User");
@@ -82,8 +82,7 @@ namespace ToDoApp.API.Controllers
             var claimsIdentity = new ClaimsIdentity(new Claim[]
             {
                 new(JwtRegisteredClaimNames.Sub, identity.Email ?? throw new InvalidOperationException()),
-                new(JwtRegisteredClaimNames.Email, identity.Email ?? throw new InvalidOperationException()),
-                new(ClaimTypes.Sid, identity.Id)
+                new(JwtRegisteredClaimNames.Email, identity.Email ?? throw new InvalidOperationException())
             });
 
             claimsIdentity.AddClaims(newClaims);
@@ -111,7 +110,6 @@ namespace ToDoApp.API.Controllers
             {
                 new(JwtRegisteredClaimNames.Sub, user.Email ?? throw new InvalidOperationException()),
                 new(JwtRegisteredClaimNames.Email, user.Email ?? throw new InvalidOperationException()),
-                new(ClaimTypes.Sid, user.Id)
             });
 
             claimsIdentity.AddClaims(claims);
@@ -139,7 +137,6 @@ namespace ToDoApp.API.Controllers
                 await _signInManager.SignOutAsync();
             }
 
-            
             return Ok("Logout Successful");
         }
 

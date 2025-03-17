@@ -33,10 +33,14 @@ var connectionString = builder.Configuration.GetConnectionString("DatabaseConnec
     ?? throw new InvalidOperationException("Connection string" + "'DefaultConnection' not found.");
 builder.Services.AddDbContext<ToDoDbContext>(options =>
     options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<AppIdentityDbContext>(options => 
+    options.UseSqlServer(connectionString));
 
-builder.RegisterAuthentication();
+
+builder.RegisterAuthentication(); // Extension method
 builder.Services.AddScoped<IdentityService>();
 
+builder.Services.AddScoped<UserService>();
 
 builder.Services.AddCors(options =>
 {

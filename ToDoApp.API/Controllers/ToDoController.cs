@@ -6,15 +6,17 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using ToDoApp.API.Data;
 using ToDoApp.API.Models;
+using ToDoApp.API.Services;
 
 namespace ToDoApp.API.Controllers
 {
     [ApiController]
-    [Authorize]
+    //[Authorize]
     [Route("[controller]/[action]")]
     public class ToDoController : Controller
     {
         private readonly ToDoDbContext _dbContext;
+        private readonly UserService _UserService;
 
         public ToDoController(ToDoDbContext dbContext) 
         {
@@ -29,6 +31,8 @@ namespace ToDoApp.API.Controllers
         [HttpGet]
         public IActionResult TestGetGUID()
         {
+            // HttpContext. claims or user.claims has some of what I need but not all
+            var user = HttpContext.User.Identity.Name;
             return Ok(GetUserGuid());
         }
 

@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using ToDoApp.API.Data;
+using ToDoApp.API.Models;
 using ToDoApp.API.Options;
 
 namespace ToDoApp.API.Extensions
@@ -45,7 +46,7 @@ namespace ToDoApp.API.Extensions
                     jwt.ClaimsIssuer = jwtSettings.Issuer;
                 });
 
-            builder.Services.AddIdentityCore<IdentityUser>(options =>
+            builder.Services.AddIdentityCore<AppUser>(options =>
             {
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
@@ -53,9 +54,9 @@ namespace ToDoApp.API.Extensions
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequiredLength = 5;
             })
-                .AddRoles<IdentityRole>()
+                .AddRoles<IdentityRole<Guid>>()
                 .AddSignInManager()
-                .AddEntityFrameworkStores<ToDoDbContext>();
+                .AddEntityFrameworkStores<AppIdentityDbContext>();
 
             return builder;
         }
@@ -95,14 +96,14 @@ namespace ToDoApp.API.Extensions
 
         public static async Task CreateRoles(IServiceProvider serviceProvider)
         {
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
             string[] roleNames = { "Admin", "User" };
             foreach (var roleName in roleNames)
             {
                 var roleExist = await roleManager.RoleExistsAsync(roleName);
                 if (!roleExist)
                 {
-                    await roleManager.CreateAsync(new IdentityRole(roleName));
+                    await roleManager.CreateAsync(new IdentityRole<Guid> (roleName));
                 }
             }
         }
