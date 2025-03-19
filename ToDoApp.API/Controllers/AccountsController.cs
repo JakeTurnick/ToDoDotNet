@@ -5,6 +5,7 @@ using System.Security.Claims;
 using ToDoApp.API.Services;
 using ToDoApp.API.Data;
 using ToDoApp.API.Models;
+using System.Security.Principal;
 
 namespace ToDoApp.API.Controllers
 {
@@ -12,13 +13,13 @@ namespace ToDoApp.API.Controllers
     [Route("[controller]")]
     public class AccountsController : ControllerBase
     {
-        private readonly ToDoDbContext _context;
+        private readonly AppIdentityDbContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IdentityService _identityService;
 
-        public AccountsController(ToDoDbContext context, UserManager<AppUser> userManager,
+        public AccountsController(AppIdentityDbContext context, UserManager<AppUser> userManager,
             RoleManager<IdentityRole<Guid>> roleManager, IdentityService identityService,
             SignInManager<AppUser> signInManager)
         {
@@ -82,7 +83,8 @@ namespace ToDoApp.API.Controllers
             var claimsIdentity = new ClaimsIdentity(new Claim[]
             {
                 new(JwtRegisteredClaimNames.Sub, identity.Email ?? throw new InvalidOperationException()),
-                new(JwtRegisteredClaimNames.Email, identity.Email ?? throw new InvalidOperationException())
+                new(JwtRegisteredClaimNames.Email, identity.Email ?? throw new InvalidOperationException()),
+                new(JwtRegisteredClaimNames.Sid, identity.Id.ToString() ?? throw new InvalidOperationException())
             });
 
             claimsIdentity.AddClaims(newClaims);
@@ -110,8 +112,8 @@ namespace ToDoApp.API.Controllers
             {
                 new(JwtRegisteredClaimNames.Sub, user.Email ?? throw new InvalidOperationException()),
                 new(JwtRegisteredClaimNames.Email, user.Email ?? throw new InvalidOperationException()),
+                new(JwtRegisteredClaimNames.Sid, user.Id.ToString() ?? throw new InvalidOperationException())
             });
-
             claimsIdentity.AddClaims(claims);
 
             foreach (var role in roles)

@@ -31,9 +31,8 @@ namespace ToDoApp.API.Controllers
         [HttpGet]
         public IActionResult TestGetGUID()
         {
-            // HttpContext. claims or user.claims has some of what I need but not all
-            var user = HttpContext.User.Identity.Name;
-            return Ok(GetUserGuid());
+            string userSid = User.Claims.FirstOrDefault(c => c.Type == "sid")?.Value;
+            return Ok(userSid);
         }
 
         [HttpGet]
