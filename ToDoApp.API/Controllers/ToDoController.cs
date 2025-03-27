@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +18,12 @@ namespace ToDoApp.API.Controllers
     {
         private readonly ToDoDbContext _dbContext;
         private readonly UserService _UserService;
+        private readonly UserManager<AppUser> _userManager;
 
-        public ToDoController(ToDoDbContext dbContext) 
+        public ToDoController(ToDoDbContext dbContext, UserManager<AppUser> userManager) 
         {
             _dbContext = dbContext;
-        }
-
-        private string GetUserGuid()
-        {
-            return User.FindFirstValue(ClaimTypes.Sid);
+            _userManager = userManager;
         }
 
         [HttpGet]

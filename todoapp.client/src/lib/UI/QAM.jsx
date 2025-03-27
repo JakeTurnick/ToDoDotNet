@@ -20,7 +20,6 @@ export default function QAM() {
     };
 
     
-
     // {`${styles.QAM_Container} ${isOpen ? styles.open : styles.closed}`}
     return (
         <section className={`${styles.QAM_Container} ${isOpen ? styles.open : styles.closed}`}>

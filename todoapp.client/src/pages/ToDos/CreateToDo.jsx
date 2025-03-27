@@ -17,7 +17,7 @@ export default function CreateToDo(props) {
         // use to change method
     }
 
-    console.log("todo prop", props.todo)
+    //console.log("todo prop", props.todo)
     // Create state using page vars
     const [newTodo, setNewTodo] = useState(props.todo ? props.todo :
         {
@@ -30,7 +30,7 @@ export default function CreateToDo(props) {
 
 
     function validateTodo() {
-        if (newTodo.Name.length > 0) {
+        if (newTodo.name.length > 0) {
             return true
         }
 
@@ -61,7 +61,7 @@ export default function CreateToDo(props) {
                     <button onClick={() => { props.closeToDoModal(); }}>Cancel</button>
                     <button onClick={() => {
                         if (validateTodo()) {
-                            callAPIAsync("ToDoService", "CreateToDo", "POST", newTodo);
+                            callAPIAsync("POST", "ToDoService", "CreateToDo", newTodo);
                             props.closeToDoModal();
                             props.fetchToDos();
                         } else {

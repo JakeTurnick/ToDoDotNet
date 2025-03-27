@@ -8,10 +8,13 @@ import ToDoManager from '@/pages/ToDoManager'
 import { PageNotFound } from './PageNotFound'
 import Register from '@/pages/Auth/Register'
 import NotFoundRedirect from './NotFoundRedirect'
+import { useEffect } from 'react'
 
 
 const RouteIndex = () => {
     const { token } = useAuth();
+
+    console.log("routes initialized ", token)
 
     const PrintToken = () => {
         console.log({token})
@@ -31,15 +34,14 @@ const RouteIndex = () => {
                     {token ?
                         /* AuthOnly */
                         <Route path="/" element={<ProtectedRoute />} >
-                            <Route path="/" element={<div>Authed login</div>} />
-                            <Route path="ToDos" element={<ToDoManager />} />
+                            
+                            <Route path="/ToDos" element={<ToDoManager />} />
                             <Route path="/logout" element={<Logout />} />
                         </Route>
                         : 
                         /* Not-Auth */
-                        <Route path="/" element={<Login /> }>
+                        <Route path="/">
                             <Route path="/login" element={<Login />} />
-                            
                             <Route path="/register" element={<Register />} />
                         </Route>
                     }

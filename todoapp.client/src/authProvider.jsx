@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
             delete axios.defaults.headers.common["Authorization"];
             localStorage.removeItem('token');
         }
-    }, [token]);
+    }, [token])
 
     const contextValue = useMemo(
         () => ({

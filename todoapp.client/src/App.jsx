@@ -4,7 +4,6 @@ import AuthProvider from '@/authProvider'
 import RouteIndex from '@/routes/index'
 import QAM from "./lib/UI/QAM"
 import styles from "./App.module.css"
-
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faChevronRight, faListCheck, faHouse, faUser } from '@fortawesome/free-solid-svg-icons'
 
@@ -26,7 +25,6 @@ export default function App() {
             </aside>
             <main style={{ padding: "10px" }}>
                 <Outlet />
-
             </main>
 
         </div>

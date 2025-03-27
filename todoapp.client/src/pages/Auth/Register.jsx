@@ -1,20 +1,29 @@
 import { useNavigate, Link } from 'react-router';
+import { useActionState } from 'react';
+import { callAPIAsync } from "@/lib/functions.js"
 
-function Register() {
+const Register = () => {
+    const [message, formAction, isPending] = useActionState(handleRegister, null)
 
-
-    const handleRegister = () => {
+    async function handleRegister(initialState, formData) {
         console.log("registering")
+        const user = {
+            "Email": formData.get("email"),
+            "Password": formData.get("password")
+        }
+
+        const response = await callAPIAsync("POST", "Accounts", "Register", user)
+        console.log("login response: ", response)
     }
   return (
       <div>
-          <form className="mx-auto flex flex-col" onSubmit={handleRegister }>
+          <form action={formAction} className="mx-auto flex flex-col">
               <label>User:</label>
-              <input type="email" placeholder="Your@email"></input>
+              <input type="email" name="email" placeholder="Your@email"></input>
               <label>Password:</label>
-              <input type="password" placeholder="super-secret"></input>
+              <input type="password" name="password" placeholder="super-secret"></input>
+              <button type="submit">Register</button>
           </form>
-          <button onClick={handleRegister}>Fake login</button>
           <br />
           <Link to={{
               pathname: "/home"

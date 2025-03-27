@@ -43,14 +43,17 @@ namespace ToDoApp.API.Controllers
                 return BadRequest(createdIdentity.Errors);
             }
 
-            var newClaims = new List<Claim>
+            var newClaims = new List<Claim>();
+
+            // Names are optional
+            if (registerUser.FirstName != null && registerUser.LastName != null)
             {
-                new("FirstName", registerUser.FirstName),
-                new("LastName", registerUser.LastName)
-            };
+                newClaims.Add(new("FirstName", registerUser.FirstName));
+                newClaims.Add(new("LastName", registerUser.LastName));
 
-            await _userManager.AddClaimsAsync(identity, newClaims);
-
+                await _userManager.AddClaimsAsync(identity, newClaims);
+            }
+            
             if (registerUser.Role == Role.Admin)
             {
                 var role = await _roleManager.FindByNameAsync("Admin");
@@ -66,7 +69,6 @@ namespace ToDoApp.API.Controllers
 
                 newClaims.Add(new Claim(ClaimTypes.Role, "Admin"));
             }
-
             else
             {
                 var role = await _roleManager.FindByNameAsync("User");
@@ -99,7 +101,10 @@ namespace ToDoApp.API.Controllers
         public async Task<IActionResult> Login(LoginUser login)
         {
             var user = await _userManager.FindByEmailAsync(login.Email);
-            if (user is null) return BadRequest("No such user found");
+            if (user is null) return new ObjectResult("No user found")
+            {
+                StatusCode = 406
+            };
 
             var result = await _signInManager.CheckPasswordSignInAsync(user, login.Password, false);
             if (!result.Succeeded) return BadRequest("Couldn't sign in");
@@ -150,6 +155,6 @@ public enum Role
     Admin,
     User
 }
-public record RegisterUser(string Email, string Password, string FirstName, string LastName, Role Role);
+public record RegisterUser(string Email, string Password, string? FirstName, string? LastName, Role Role);
 public record LoginUser(string Email, string Password);
 public record AuthenticationResult(string Token);

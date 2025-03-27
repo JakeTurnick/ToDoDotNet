@@ -1,25 +1,41 @@
 import { useAuth } from '@/authProvider'
 import { useNavigate, Link } from 'react-router'
+import { useActionState } from 'react';
+import { callAPIAsync } from "@/lib/functions.js"
 
 const Login = () => {
     const { setToken } = useAuth();
     const navigate = useNavigate();
+    const [message, formAction, isPending] = useActionState(handleLogin, null)
 
-    const handleLogin = () => {
-        setToken("this is a test token");
-        navigate("/", { replace: true });
+    async function handleLogin(initialState, formData) {
+        const user = {
+            "Email": formData.get("email"),
+            "Password": formData.get("password")
+        }
+
+        const response = await callAPIAsync("POST", "Accounts", "Login", user)
+
+        if (response.status == 200) {
+            setToken(response.data.token)
+            navigate("/home", { replace: true })
+        }
+
+        // if (response.errors <= 0)
+        //navigate("/", { replace: true });
     };
 
 
     return (
         <>
-            <form className="mx-auto flex flex-col">
+            <form action={formAction} className="mx-auto flex flex-col">
                 <label>User:</label>
-                <input type="email" placeholder="Your@email"></input>
+                <input type="email" name="email" placeholder="Your@email"></input>
                 <label>Password:</label>
-                <input type="password" placeholder="super-secret"></input>
+                <input type="password" name="password" placeholder="super-secret"></input>
+                <button type="submit">Login</button>
             </form>
-            <button onClick={handleLogin}>Fake login</button>
+            
             <br />
             <article>
                 <Link to={{

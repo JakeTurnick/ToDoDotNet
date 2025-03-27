@@ -15,33 +15,21 @@ export default function ToDoManager() {
         fetchToDos
     })
 
+    function testGetGuid() {
+        callAPIAsync("get", "ToDo", "TestGetGUID")
+    }
+
+    window.CallAPIAsync = testGetGuid
+
+
     async function fetchToDos() {
         const response = await callAPIAsync("GET", "ToDoService", "GetToDos");
-        setToDos(response.data)
-        //try {
-        //    const response = await axios({
-        //        method: "get",
-        //        url: "https://localhost:7152/ToDoService/GetToDos",
-        //        responseType: "json"
-        //    })
-
-        //    console.log({response})
-        //    setToDos(response.data)
-        //} catch (error) {
-        //    console.log("axios error ", error)
-        //}
-        
+        setToDos(response.data)        
     }
 
     function closeToDoModal() {
         setShowModal(false)
     }
-    /*
-    TODO: (haha)
-
-    Create page variable to hold modal,
-    update modal variable, {showModal && modalVariable}
-    */
 
     function showToDoModal(id) {
         let EditToDo;

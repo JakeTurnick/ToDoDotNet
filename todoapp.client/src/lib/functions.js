@@ -12,87 +12,79 @@ export async function callAPIAsync(method, controller, endpoint, params) {
     let APIURI = `https://localhost:7152/${controller}/${endpoint}`;
     method = method.toUpperCase();
 
-    
-
     let data;
     switch (method) {
         case "GET":
             try {
-                APIURI += params ? `/${params}` : "";
-                const response = await axios({
-                    method: "get",
-                    url: APIURI,
-                    responseType: "json"
-                })
-
-                // Check if the response is successful (status code 200-299)
-                if (response.status !== 200) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                // Might have to update APIURI if using id in URI instead of data
+                // TODO - Test this
+                if (typeof (params?.id) == "number") {
+                    APIURI += `/${params.id}`
                 }
 
-
-                // Return the fulfilled data
+                const response = await axios({
+                    method: "GET",
+                    url: APIURI,
+                    //data: params,
+                    validateStatus: function (status) {
+                        return status >= 200 && status < 500;
+                    }
+                });
                 return response;
-
             } catch (error) {
-                console.error("Caught API error - ", error.message)
+                console.log("axios error: ", error);
+                return error;
             }
-            break;
 
         case "POST":
             try {
-                const response = await fetch(APIURI, {
+                const response = await axios({
                     method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify(params),
+                    url: APIURI,
+                    data: params,
+                    validateStatus: function (status) {
+                        return status >= 200 && status < 500;
+                    }
                 });
-                if (!response.ok) {
-                    console.error(response)
-                    throw new Error(` Error Response status ${response.status}`)
-
-                }
-                data = await response.json();
-                return data;
+                return response;
             } catch (error) {
-                console.error("Caught error", error.message)
+                console.log("axios error: ", error);
+                return error;
             }
-            break;
 
         case "PUT":
             try {
-                const response = await fetch(APIURI, {
+                const response = await axios({
                     method: "PUT",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
+                    url: APIURI,
+                    data: params,
                     body: JSON.stringify(params),
+                    validateStatus: function (status) {
+                        return status >= 200 && status < 500;
+                    }
                 });
-                if (!response.ok) {
-                    throw new Error(` Error Response status ${response.status}`)
-                }
-                data = await response.json();
+                return response;
             } catch (error) {
-                console.error("Caught error", error.message)
+                console.log("axios error: ", error);
+                return error;
             }
-            return data;
 
         case "DELETE":
+            // Might have to update APIURI if using id in URI instead of data
             try {
-                APIURI += params ? `/${params}` : "";
-                const response = await fetch(APIURI, {
+                const response = await axios({
                     method: "DELETE",
+                    url: APIURI,
+                    validateStatus: function (status) {
+                        return status >= 200 && status < 500;
+                    }
                 });
-                if (!response.ok) {
-                    throw new Error(` Error Response status ${response.status}`)
-                }
-                data = await response.json();
-
+                return response;
             } catch (error) {
-                console.error("Caught error", error.message)
+                console.log("axios error: ", error);
+                return error;
             }
-            return data;
+
         default:
             console.log("No method provided");
             break;
