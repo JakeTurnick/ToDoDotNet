@@ -1,10 +1,10 @@
 import { useAuth } from '@/authProvider'
 import { useNavigate, Link } from 'react-router'
-import { useActionState } from 'react';
+import { useActionState, useEffect } from 'react';
 import { callAPIAsync } from "@/lib/functions.js"
 
 const Login = () => {
-    const { setToken } = useAuth();
+    const { setToken, token } = useAuth();
     const navigate = useNavigate();
     const [message, formAction, isPending] = useActionState(handleLogin, null)
 
@@ -14,15 +14,17 @@ const Login = () => {
             "Password": formData.get("password")
         }
 
-        const response = await callAPIAsync("POST", "Accounts", "Login", user)
+        await callAPIAsync("POST", "Accounts", "Login", user).then((response) => {
+            if (response.status == 200) {
+                setToken(response.data.token)
+            }
 
-        if (response.status == 200) {
-            setToken(response.data.token)
-            navigate("/home", { replace: true })
-        }
+            setTimeout(() => {
+                navigate("/home")
+            }, 1) // hey man, I don't notice any difference but my headache is gone
+        })
 
-        // if (response.errors <= 0)
-        //navigate("/", { replace: true });
+        
     };
 
 

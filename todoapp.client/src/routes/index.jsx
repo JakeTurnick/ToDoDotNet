@@ -14,7 +14,7 @@ import { useEffect } from 'react'
 const RouteIndex = () => {
     const { token } = useAuth();
 
-    console.log("routes initialized ", token)
+    //console.log("routes initialized ", token)
 
     const PrintToken = () => {
         console.log({token})
@@ -34,7 +34,6 @@ const RouteIndex = () => {
                     {token ?
                         /* AuthOnly */
                         <Route path="/" element={<ProtectedRoute />} >
-                            
                             <Route path="/ToDos" element={<ToDoManager />} />
                             <Route path="/logout" element={<Logout />} />
                         </Route>
