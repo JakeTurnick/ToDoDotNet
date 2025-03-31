@@ -12,7 +12,7 @@ using ToDoApp.API.Services;
 namespace ToDoApp.API.Controllers
 {
     [ApiController]
-    //[Authorize]
+    [Authorize]
     [Route("[controller]/[action]")]
     public class ToDoController : Controller
     {
@@ -29,8 +29,17 @@ namespace ToDoApp.API.Controllers
         [HttpGet]
         public IActionResult TestGetGUID()
         {
-            string userSid = User.Claims.FirstOrDefault(c => c.Type == "sid")?.Value;
-            return Ok(userSid);
+            // Access the default identity cookie
+            if (Request.Cookies.TryGetValue(".AspNetCore.Identity.Application", out string cookieValue))
+            {
+                string userSid = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+
+                return Ok(new { userSid, cookieValue });
+            }
+            else
+            {
+                return BadRequest("Cookie not found");
+            }
         }
 
         [HttpGet]

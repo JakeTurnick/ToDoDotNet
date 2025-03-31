@@ -109,7 +109,12 @@ namespace ToDoApp.API.Controllers
             var result = await _signInManager.CheckPasswordSignInAsync(user, login.Password, false);
             if (!result.Succeeded) return BadRequest("Couldn't sign in");
 
-            var claims = await _userManager.GetClaimsAsync(user);
+            await _signInManager.SignInAsync(user, isPersistent: false);
+            return Ok(new { message = "logged in" });
+
+            /* Part of custom JWT Cookie method
+             * 
+             * var claims = await _userManager.GetClaimsAsync(user);
 
             var roles = await _userManager.GetRolesAsync(user);
 
@@ -128,8 +133,25 @@ namespace ToDoApp.API.Controllers
 
             var token = _identityService.CreateSecurityToken(claimsIdentity);
 
-            var response = new AuthenticationResult(_identityService.WriteToken(token));
-            return Ok(response);
+            
+            string cookieValue = _identityService.WriteToken(token);
+            // var response = new AuthenticationResult(cookieValue);
+            // return Ok(response);
+            */
+
+            /* Http cookie method
+             * writes the cookie that I want, isn't recognized by [Authorize] attribute
+             * 
+             * Response.Cookies.Append("jwt", cookieValue, new CookieOptions
+            {
+                HttpOnly = true,
+                Secure = true,
+                SameSite = SameSiteMode.Lax
+            }); */
+
+
+            // this works but ignores all other claims
+
         }
 
         [HttpPost]

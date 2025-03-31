@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -45,6 +47,30 @@ namespace ToDoApp.API.Extensions
                     jwt.Audience = jwtSettings.Audiences?[0];
                     jwt.ClaimsIssuer = jwtSettings.Issuer;
                 });
+            builder.Services
+                .AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+                    options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+                })
+                .AddCookie(IdentityConstants.ApplicationScheme, options =>
+                {
+                    options.LoginPath = "/Account/Login";
+                    options.AccessDeniedPath = "/Account/AccessDenied";
+                });
+
+            /* Custom method (check login endpoint as well)
+             * 
+             * Uses the custom claims I want, doesn't recognize in [Authorize] attribute
+             * .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.Cookie.Name = "jwt";
+                    options.Cookie.HttpOnly = true;
+                    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+                    options.Cookie.SameSite = SameSiteMode.None;
+                });
+             * */
 
             builder.Services.AddIdentityCore<AppUser>(options =>
             {
@@ -75,6 +101,14 @@ namespace ToDoApp.API.Extensions
                     BearerFormat = "JWT",
                     Scheme = "Bearer"
                 });
+                options.AddSecurityDefinition("CookieAuth", new OpenApiSecurityScheme
+                {
+                    In = ParameterLocation.Cookie,
+                    Name = "Cookie",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Cookie",
+                    Description = "Cookie based Auth with JWT"
+                });
                 options.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
@@ -83,10 +117,21 @@ namespace ToDoApp.API.Extensions
                             Reference = new OpenApiReference
                             {
                                 Type = ReferenceType.SecurityScheme,
-                                Id="bearer"
+                                Id = "bearer"
                             }
                         },
                         new string[]{ }
+                    },
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "CookieAuth"
+                            }
+                        },
+                        new string[] { }
                     }
                 });
             });

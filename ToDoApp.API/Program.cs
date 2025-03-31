@@ -115,5 +115,27 @@ internal sealed class BearerSecuritySchemeTransformer(Microsoft.AspNetCore.Authe
                 });
             }
         }
+        if (authenticationSchemes.Any(authScheme => authScheme.Name == "Cookie"))
+        {
+            var requirements = new Dictionary<string, OpenApiSecurityScheme>
+            {
+                ["Cookie"] = new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "cookie",
+                    In = ParameterLocation.Cookie,
+                }
+            };
+            document.Components ??= new OpenApiComponents();
+            document.Components.SecuritySchemes = requirements;
+
+            foreach (var operation in document.Paths.Values.SelectMany(path => path.Operations))
+            {
+                operation.Value.Security.Add(new OpenApiSecurityRequirement
+                {
+                    [new OpenApiSecurityScheme { Reference = new OpenApiReference { Id = "Cookie", Type = ReferenceType.SecurityScheme } }] = Array.Empty<string>()
+                });
+            }
+        }
     }
 }
