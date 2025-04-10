@@ -8,5 +8,6 @@ namespace ToDoApp.API.Data
     public class ToDoDbContext(DbContextOptions<ToDoDbContext> options) : IdentityDbContext<IdentityUser>(options)
     {
         public DbSet<ToDo> ToDos { get; set; }
+        public DbSet<DataTest> DataTest { get; set; }
     }
 }
