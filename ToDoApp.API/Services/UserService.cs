@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using ToDoApp.API.Services;
 using ToDoApp.API.Models;
+using Azure.Core;
 
 namespace ToDoApp.API.Services
 {
@@ -15,10 +16,20 @@ namespace ToDoApp.API.Services
             _userManager = userManager;
         }
 
-        public async Task<Guid> GetUserGuidAsync(string userName)
+        public string GetUserGuidAsync(HttpRequest request)
         {
-            var user = await _userManager.FindByNameAsync(userName);
-            return user?.Id ?? Guid.Empty; // Assuming UserGuid is the Id property
+            // Access the default identity cookie
+            if (request.Cookies.TryGetValue(".AspNetCore.Identity.Application", out string cookieValue))
+            {
+                var user = request.HttpContext.User;
+                string userSid = user.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+
+                return userSid;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
