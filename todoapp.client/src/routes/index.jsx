@@ -8,13 +8,10 @@ import ToDoManager from '@/pages/ToDoManager'
 import { PageNotFound } from './PageNotFound'
 import Register from '@/pages/Auth/Register'
 import NotFoundRedirect from './NotFoundRedirect'
-import { useEffect } from 'react'
 
 
 const RouteIndex = () => {
     const { token } = useAuth();
-
-    //console.log("routes initialized ", token)
 
     const PrintToken = () => {
         console.log({token})
