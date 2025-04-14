@@ -16,4 +16,16 @@ namespace ToDoApp.API.Models
         public DateOnly? StartDate { get; set; }
         public DateOnly? EndDate { get; set; }
     }
+
+    public class unsavedToDo
+    {
+        public Guid? CreatedByUserGuid { get; set; }
+        [Required]
+        public string? Name { get; set; }
+        public string? Description { get; set; }
+        [Required]
+        public bool IsCompleted { get; set; } = false;
+        public DateOnly? StartDate { get; set; }
+        public DateOnly? EndDate { get; set; }
+    }
 }

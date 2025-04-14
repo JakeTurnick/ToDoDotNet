@@ -30,22 +30,7 @@ namespace ToDoApp.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult TestGetGUID()
-        {
-            // Access the default identity cookie
-            if (Request.Cookies.TryGetValue(".AspNetCore.Identity.Application", out string cookieValue))
-            {
-                string userSid = User.Claims.FirstOrDefault(c => c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
-
-                return Ok(userSid);
-            }
-            else
-            {
-                return BadRequest("Cookie not found");
-            }
-        }
-
-        [HttpGet]
+        [Authorize(Roles="Admin")]
         public IActionResult GetToDos()
         {
             var toDos = _dbContext.ToDos.FromSql($"EXECUTE dbo.SelectAllToDos").ToList();
@@ -59,8 +44,12 @@ namespace ToDoApp.API.Controllers
         [HttpGet]
         public IActionResult GetUserToDos()
         {
-            var userGuid = new SqlParameter("@UserGuid", _userService.GetUserGuidAsync(Request));
-            if (userGuid == null) return BadRequest("No user");
+            if (!Guid.TryParse(_userService.GetUserGuidAsync(Request), out Guid guid))
+            {
+                return BadRequest("No user");
+            }
+
+            var userGuid = new SqlParameter("@UserGuid", guid);
 
             var toDos = _dbContext.ToDos.FromSqlRaw($"EXECUTE dbo.SelectAllToDosByUser " +
                 $"@UserGuid",
@@ -68,43 +57,35 @@ namespace ToDoApp.API.Controllers
             return Ok(toDos);
         }
 
-        [HttpGet("{Id}")]
-        public IActionResult GetToDoById(int Id)
+        [HttpGet("{guid}")]
+        public IActionResult GetToDoByGuid(Guid guid)
         {
-            if (Id <= 0)
+            if (guid == Guid.Empty)
             {
                 return BadRequest("No Id found on request");
             }
 
-            var id = new SqlParameter("@Id", Id);
+            var toDoGuid = new SqlParameter("@Guid", guid);
             var result = _dbContext.ToDos.FromSqlRaw($"EXECUTE dbo.SelectToDoById " +
-                $"@Id",
-                id);
+                $"@Guid",
+                toDoGuid);
 
             return Ok(result);
         }
 
         [HttpPost]
-        public IActionResult PostToDo(ToDo toDo)
+        public IActionResult PostToDo(unsavedToDo toDo)
         {
-            // _userService.GetUserGuidAsync(Request)
-            Guid.TryParse("F8659D03-DA2E-4835-F7C9-08DD6D4A9F45", out Guid userGuid);
-            SqlGuid newGuid;
-
-            if (userGuid == Guid.Empty)
+            if (!Guid.TryParse(_userService.GetUserGuidAsync(Request), out Guid userGuid))
             {
                 return BadRequest("No user");
-            } else
-            {
-                newGuid = new SqlGuid("F8659D03-DA2E-4835-F7C9-08DD6D4A9F45");
             }
 
-            var guid = new SqlParameter("@Guid", Guid.NewGuid());
-            var createdByUserGuid = new SqlParameter("@CreatedByUserGuid", new Guid("F8659D03-DA2E-4835-F7C9-08DD6D4A9F45"));
+            var createdByUserGuid = new SqlParameter("@CreatedByUserGuid", userGuid);
 
             if (toDo.Name?.Length < 1)
             {
-                return BadRequest("ToDo name must be present and longer than 1 character");
+                return BadRequest("ToDo name must be a valid string");
             }
             var name = new SqlParameter("@Name", toDo.Name);
             var description = new SqlParameter("@Description", toDo.Description);
@@ -133,16 +114,17 @@ namespace ToDoApp.API.Controllers
         {
             if (toDo.Guid == Guid.Empty)
             {
-                return BadRequest("No toDo Id found on request");
+                return BadRequest("No Guid found to locate ToDo");
             }
-            var guid = new SqlParameter("@Id", toDo.Guid);
+
+            var guid = new SqlParameter("@Guid", toDo.Guid);
             var name = new SqlParameter("@Name", toDo.Name);
-            var description = new SqlParameter("@Description", toDo.Description);
+            var description = new SqlParameter("@Description", toDo.Description ?? (object)DBNull.Value);
             var startDate = new SqlParameter("@StartDate", toDo.StartDate.HasValue ? (object)toDo.StartDate.Value : DBNull.Value);
             var endDate = new SqlParameter("@EndDate", toDo.EndDate.HasValue ? (object)toDo.EndDate.Value : DBNull.Value);
             var isCompleted = new SqlParameter("@IsCompleted", toDo.IsCompleted);
             var result = _dbContext.ToDos.FromSqlRaw($"EXECUTE dbo.UpdateToDo " +
-                $"@Id, " +
+                $"@Guid, " +
                 $"@Name, " +
                 $"@Description, " +
                 $"@IsCompleted, " +
@@ -158,15 +140,15 @@ namespace ToDoApp.API.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{Id}")]
-        public IActionResult DeleteToDoById(int Id)
+        [HttpDelete("{guid}")]
+        public IActionResult DeleteToDoByGuid(Guid guid)
         {
-            if (Id <= 0)
+            if (guid == Guid.Empty)
             {
                 return BadRequest("No Id found on request");
             }
 
-            var idParam = new SqlParameter("@Id", Id);
+            var toDoGuid = new SqlParameter("@Guid", guid);
             var resultParam = new SqlParameter
             {
                 ParameterName = "@Result",
@@ -174,7 +156,7 @@ namespace ToDoApp.API.Controllers
                 Direction = System.Data.ParameterDirection.Output
             };
 
-            _dbContext.Database.ExecuteSqlRaw("EXEC dbo.DeleteToDoById @Id, @Result OUTPUT", idParam, resultParam);
+            _dbContext.Database.ExecuteSqlRaw("EXEC dbo.DeleteToDoByGuid @Guid, @Result OUTPUT", toDoGuid, resultParam);
 
             int result = (int)resultParam.Value;
 
