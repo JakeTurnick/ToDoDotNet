@@ -11,10 +11,10 @@ import NotFoundRedirect from './NotFoundRedirect'
 
 
 const RouteIndex = () => {
-    const { token } = useAuth();
+    const { authStatus } = useAuth();
 
     const PrintToken = () => {
-        console.log({token})
+        console.log({ authStatus })
     }
 
     window.PrintToken = PrintToken;
@@ -28,7 +28,7 @@ const RouteIndex = () => {
                     {/* Public */}
                     <Route path="/home" element={<div>Public page for everyone</div> } />
                 
-                    {token ?
+                    {authStatus ?
                         /* AuthOnly */
                         <Route path="/" element={<ProtectedRoute />} >
                             <Route path="/ToDos" element={<ToDoManager />} />

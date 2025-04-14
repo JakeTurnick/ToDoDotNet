@@ -4,7 +4,7 @@ import { useActionState, useEffect } from 'react';
 import { callAPIAsync } from "@/lib/functions.js"
 
 const Login = () => {
-    const { setToken, token } = useAuth();
+    const { authStatus, setAuthStatus } = useAuth();
     const navigate = useNavigate();
     const [message, formAction, isPending] = useActionState(handleLogin, null)
 
@@ -16,15 +16,15 @@ const Login = () => {
 
         await callAPIAsync("POST", "Accounts", "Login", user).then((response) => {
             if (response.status == 200) {
-                setToken(response.data.token)
+                console.log(response)
+                console.log(document.cookie)
+                setAuthStatus(true)
             }
 
             setTimeout(() => {
                 navigate("/home")
             }, 1) // hey man, I don't notice any difference but my headache is gone
         })
-
-        
     };
 
 

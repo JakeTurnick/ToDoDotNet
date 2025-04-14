@@ -2,12 +2,12 @@ import { useNavigate } from "react-router";
 import { useAuth } from "@/authProvider";
 
 const Logout = () => {
-    const { setToken } = useAuth();
+    const { setAuthStatus } = useAuth();
     const navigate = useNavigate();
 
     const handleLogout = () => {
         console.log("logout redirecting")
-        setToken();
+        setAuthStatus(false);
         navigate("/", { replace: true });
     };
 

@@ -6,11 +6,12 @@ using ToDoApp.API.Services;
 using ToDoApp.API.Data;
 using ToDoApp.API.Models;
 using System.Security.Principal;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ToDoApp.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class AccountsController : ControllerBase
     {
         private readonly AppIdentityDbContext _context;
@@ -18,20 +19,21 @@ namespace ToDoApp.API.Controllers
         private readonly RoleManager<IdentityRole<Guid>> _roleManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly IdentityService _identityService;
+        private readonly UserService _userService;
 
         public AccountsController(AppIdentityDbContext context, UserManager<AppUser> userManager,
             RoleManager<IdentityRole<Guid>> roleManager, IdentityService identityService,
-            SignInManager<AppUser> signInManager)
+            SignInManager<AppUser> signInManager, UserService userService)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
             _identityService = identityService;
+            _userService = userService;
         }
 
         [HttpPost]
-        [Route("register")]
         public async Task<IActionResult> Register(RegisterUser registerUser)
         {
             // Create new IdentityUser. This will persist the user to DB
@@ -46,6 +48,10 @@ namespace ToDoApp.API.Controllers
             var newClaims = new List<Claim>();
 
             // Names are optional
+            if (registerUser.UserName != null)
+            {
+                newClaims.Add(new("UserName", registerUser.UserName));
+            }
             if (registerUser.FirstName != null && registerUser.LastName != null)
             {
                 newClaims.Add(new("FirstName", registerUser.FirstName));
@@ -97,7 +103,6 @@ namespace ToDoApp.API.Controllers
         }
 
         [HttpPost]
-        [Route("login")]
         public async Task<IActionResult> Login(LoginUser login)
         {
             var user = await _userManager.FindByEmailAsync(login.Email);
@@ -155,7 +160,6 @@ namespace ToDoApp.API.Controllers
         }
 
         [HttpPost]
-        [Route("logout")]
         public async Task<IActionResult> Logout()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -169,6 +173,18 @@ namespace ToDoApp.API.Controllers
             return Ok("Logout Successful");
         }
 
+        [HttpGet]
+        public IActionResult AuthCheck()
+        {
+            if (!Guid.TryParse(_userService.GetUserGuidAsync(Request), out Guid guid))
+            {
+                return BadRequest("No user");
+            } else
+            {
+                return Ok("Still authenticated");
+            }
+        }
+
     }
 }
 
@@ -177,6 +193,6 @@ public enum Role
     Admin,
     User
 }
-public record RegisterUser(string Email, string Password, string? FirstName, string? LastName, Role Role);
+public record RegisterUser(string Email, string Password, string? UserName, string? FirstName, string? LastName, Role Role);
 public record LoginUser(string Email, string Password);
 public record AuthenticationResult(string Token);

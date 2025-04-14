@@ -25,6 +25,7 @@ export async function callAPIAsync(method, controller, endpoint, params) {
                 const response = await axios({
                     method: "GET",
                     url: APIURI,
+                    withCredentials: true,
                     //data: params,
                     validateStatus: function (status) {
                         return status >= 200 && status < 500;
@@ -41,6 +42,7 @@ export async function callAPIAsync(method, controller, endpoint, params) {
                 const response = await axios({
                     method: "POST",
                     url: APIURI,
+                    withCredentials: true,
                     data: params,
                     validateStatus: function (status) {
                         return status >= 200 && status < 500;
@@ -57,6 +59,7 @@ export async function callAPIAsync(method, controller, endpoint, params) {
                 const response = await axios({
                     method: "PUT",
                     url: APIURI,
+                    withCredentials: true,
                     data: params,
                     body: JSON.stringify(params),
                     validateStatus: function (status) {
@@ -75,6 +78,7 @@ export async function callAPIAsync(method, controller, endpoint, params) {
                 const response = await axios({
                     method: "DELETE",
                     url: APIURI,
+                    withCredentials: true,
                     validateStatus: function (status) {
                         return status >= 200 && status < 500;
                     }

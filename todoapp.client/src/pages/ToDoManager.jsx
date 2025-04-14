@@ -15,17 +15,12 @@ export default function ToDoManager() {
         fetchToDos
     })
 
-    function testGetGuid() {
-        callAPIAsync("get", "ToDo", "TestGetGUID")
-    }
-
-    window.CallAPIAsync = testGetGuid
-
-
     async function fetchToDos() {
-        const response = await callAPIAsync("GET", "ToDoService", "GetToDos");
+        const response = await callAPIAsync("GET", "ToDo", "GetUserToDos");
         setToDos(response.data)        
     }
+
+    window.testFetchToDos = fetchToDos;
 
     function closeToDoModal() {
         setShowModal(false)

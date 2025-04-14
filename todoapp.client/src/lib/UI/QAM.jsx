@@ -5,18 +5,22 @@ import QAMItem from "./QAM_Item";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAuth } from '@/authProvider';
 import { useNavigate } from "react-router";
+import { callAPIAsync } from "../functions";
 
 
 export default function QAM() {
     const [isOpen, setIsOpen] = useState(false);
 
-    const { token, setToken } = useAuth();
+    const { authStatus, setAuthStatus } = useAuth();
     const navigate = useNavigate();
 
     const handleLogout = () => {
         console.log("logout redirecting")
-        setToken();
-        navigate("/", { replace: true });
+        callAPIAsync("post", "Accounts", "logout").then((response) => {
+            setAuthStatus(false);
+            navigate("/", { replace: true });
+        })
+        
     };
 
     
@@ -32,12 +36,12 @@ export default function QAM() {
             </article>
             <nav className={styles.QAM_Nav}>
                 <QAMItem text={"Home"} link={"/Home"} isOpen={isOpen} icon={<FontAwesomeIcon icon="fa-solid fa-house" className={`${styles.QAM_Item_Icon} ${isOpen ? styles.open : styles.closed}`} />}></QAMItem>
-                {token ?
+                {authStatus ?
                     <QAMItem text={"To Do's"} link={"/ToDos"} isOpen={isOpen} icon={<FontAwesomeIcon icon="fa-solid fa-list-check" className={`${styles.QAM_Item_Icon} ${isOpen ? styles.open : styles.closed}`} />}></QAMItem>
                     : ""}
                 
             </nav>
-            {token ?
+            {authStatus ?
                 <button
                     onClick={handleLogout}
                     style={{alignSelf: "end"} }

@@ -6,32 +6,44 @@ import {
     useMemo,
     useState,
 } from "react";
+import { callAPIAsync } from "@/lib/functions.js"
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-    const [token, setToken_] = useState(localStorage.getItem("token"));
+    const [authStatus, setAuthStatus_] = useState(false);
 
-    const setToken =(newToken) => {
-        setToken_(newToken);
+    const setAuthStatus = (newAuthStatus) => {
+        setAuthStatus_(newAuthStatus);
     };
 
+    function testAuthCheck() {
+        callAPIAsync("Get", "Accounts", "AuthCheck").then((response) => {
+            if (response.status == 200) {
+                console.log(response)
+                setAuthStatus(true)
+            }
+        })
+    }
+
+    window.testAuthCheck = testAuthCheck
+
+
     useEffect(() => {
-        if (token) {
-            axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-            localStorage.setItem('token', token);
-        } else {
-            delete axios.defaults.headers.common["Authorization"];
-            localStorage.removeItem('token');
-        }
-    }, [token])
+        callAPIAsync("Get", "Accounts", "AuthCheck").then((response) => {
+            if (response.status == 200) {
+                console.log(response)
+                setAuthStatus(true)
+            }
+        })
+    }, [])
 
     const contextValue = useMemo(
         () => ({
-            token,
-            setToken,
+            authStatus,
+            setAuthStatus,
         }),
-        [token]
+        [authStatus]
     );
 
     return (

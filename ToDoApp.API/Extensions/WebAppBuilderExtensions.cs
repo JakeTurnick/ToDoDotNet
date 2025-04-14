@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -16,6 +17,7 @@ namespace ToDoApp.API.Extensions
     {
         public static WebApplicationBuilder RegisterAuthentication(this WebApplicationBuilder builder)
         {
+
             var jwtSettings = new JwtSettings();
             builder.Configuration.Bind(nameof(JwtSettings), jwtSettings);
 
